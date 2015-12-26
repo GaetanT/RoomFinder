@@ -1,0 +1,15 @@
+<resources>
+
+     <!--Base application theme.-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:activatedBackgroundIndicator">@drawable/my_background</item>
+        <item name="actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
+    </style>
+    <!-- Style to replace actionbar overflow icon. set item 'android:actionOverflowButtonStyle' in AppTheme -->
+    <style name="MyActionButtonOverflow" parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/icoloupe</item>
+        <!--<item name="android:background">?android:attr/actionBarItemBackground</item>
+        <item name="android:contentDescription">"Search"</item>-->
+    </style>
+
+</resources>

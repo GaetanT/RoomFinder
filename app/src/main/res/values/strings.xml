@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RoomFinder</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_section1">Favorite Rooms</string>
+    <string name="title_section2">Search</string>
+    <string name="title_section3">Profile</string>
+    <string name="title_section4">Log Out</string>
+    <string name="title_section5">About</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">example</string>
+    <string name="action_settings">settings</string>
+    <string name="action_search_by_room">Search</string>
+
+    <string-array name="Sites_Array">
+        <item>Sopra Colo 1</item>
+        <item>Sopra Colo 2</item>
+        <item>Sopra Ramassiers</item>
+        <item>Sopra Albi</item>
+    </string-array>
+
+    <string-array name="Rooms_Array">
+        <item>Room1</item>
+        <item>Room2</item>
+        <item>Room3</item>
+        <item>Room4</item>
+        <item>Room5</item>
+        <item>Room6</item>
+        <item>Room7</item>
+        <item>Room8</item>
+        <item>Room9</item>
+        <item>Room10</item>
+        <item>Room11</item>
+        <item>Room12</item>
+        <item>Room13</item>
+        <item>Room14</item>
+        <item>Room15</item>
+        <item>Room16</item>
+        <item>Room17</item>
+        <item>Room18</item>
+        <item>Room19</item>
+        <item>Room20</item>
+    </string-array>
+
+    <string-array name="Equipments_Array">
+        <item>none</item>
+        <item>visio</item>
+        <item>phone</item>
+        <item>secured</item>
+        <item>Digilab</item>
+    </string-array>
+
+    <string-array name="Nb_Array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+
+    </string-array>
+
+</resources>
