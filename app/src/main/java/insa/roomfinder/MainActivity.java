@@ -225,7 +225,6 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-
     public static class Favorite extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -262,8 +261,6 @@ public class MainActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
-
 
     public static class Profile extends Fragment {
         /**
