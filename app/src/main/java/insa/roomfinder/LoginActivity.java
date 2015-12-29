@@ -269,7 +269,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
+            mAuthTask = null; //C'est pour supprimer mAuthTask qui ne sert à rien apres avoir été exécuté ?
             showProgress(false);
 
             if (success) {
