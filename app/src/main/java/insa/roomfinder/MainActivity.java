@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -73,7 +74,7 @@ public class MainActivity extends ActionBarActivity
         }
         else if(position==4) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, Profile.newInstance(position + 1))
+                    .replace(R.id.container, About.newInstance(position + 1))
                     .commit();
         }
         /*fragmentManager.beginTransaction()
@@ -299,6 +300,9 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+
+
+
     public static class Result extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -326,6 +330,46 @@ public class MainActivity extends ActionBarActivity
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.result, container, false);
             return rootView;
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((MainActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+
+    public static class About extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static About newInstance(int sectionNumber) {
+            About fragment = new About();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public About() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.about, container, false);
+
+            return rootView;
+
         }
 
         @Override
