@@ -11,7 +11,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <TextView
                 android:layout_width="match_parent"
@@ -40,7 +42,7 @@
                 android:textStyle="bold"
                 android:id="@+id/textView"
                 android:gravity="center"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="15dp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,12 +86,48 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/date"
-                    android:ems="5"
+                    android:ems="6"
                     android:focusable="false"
                     android:layout_marginLeft="5dp"
                     android:textAlignment="center"
                     android:background="@android:color/transparent"
+                    android:textSize="16sp"
                     />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Starting at:"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/hourView"
+                    />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hourSpinner"
+                    android:choiceMode="singleChoice"
+                    android:clickable="true"
+                    android:entries="@array/Hours_Array"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/leftMarginSearch">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lenght:"/>
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lenghtSpinner"
+                    android:choiceMode="singleChoice"
+                    android:clickable="true"
+                    android:entries="@array/Lenght_Array"
+                    />
+
             </LinearLayout>
 
             <LinearLayout
@@ -112,6 +150,10 @@
                     android:ems="2"
                     android:id="@+id/editText4"
                     android:layout_marginLeft="5dp"
+                    android:textSize="16sp"
+                    android:textAlignment="textEnd"
+                    android:gravity="right"
+                    android:maxLength="3"
                     />
             </LinearLayout>
 

@@ -6,6 +6,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="leftMarginSearch">15dp</dimen>
-    <dimen name="bottomItemMargin">10dp</dimen>
+    <dimen name="bottomItemMargin">8dp</dimen>
 
 </resources>

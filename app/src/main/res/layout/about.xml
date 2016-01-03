@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/sopra_steria"
+        android:src="@drawable/logoinsa"
         android:layout_below="@+id/imageView3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />

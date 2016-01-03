@@ -20,6 +20,76 @@
         <item>Sopra Ramassiers</item>
         <item>Sopra Albi</item>
     </string-array>
+    
+    <string-array name="Lenght_Array">
+        <item>30min</item>
+        <item>1h00</item>
+        <item>1h30</item>
+        <item>2h00</item>
+        <item>2h30</item>
+        <item>3h00</item>
+        <item>3h30</item>
+        <item>4h00</item>
+        <item>4h30</item>
+        <item>5h00</item>
+        <item>5h30</item>
+        <item>6h00</item>
+        <item>6h30</item>
+        <item>7h00</item>
+        <item>7h30</item>
+        <item>8h00</item>
+    </string-array>
+
+    <string-array name="Hours_Array">
+        <item>00h00</item>
+        <item>00h30</item>
+        <item>01h00</item>
+        <item>01h30</item>
+        <item>02h00</item>
+        <item>02h30</item>
+        <item>03h00</item>
+        <item>03h30</item>
+        <item>04h00</item>
+        <item>04h30</item>
+        <item>05h00</item>
+        <item>05h30</item>
+        <item>06h00</item>
+        <item>06h30</item>
+        <item>07h00</item>
+        <item>07h30</item>
+        <item>08h00</item>
+        <item>08h30</item>
+        <item>09h00</item>
+        <item>09h30</item>
+        <item>10h00</item>
+        <item>10h30</item>
+        <item>11h00</item>
+        <item>11h30</item>
+        <item>12h00</item>
+        <item>12h30</item>
+        <item>13h00</item>
+        <item>13h30</item>
+        <item>14h00</item>
+        <item>14h30</item>
+        <item>15h00</item>
+        <item>15h30</item>
+        <item>16h00</item>
+        <item>16h30</item>
+        <item>17h00</item>
+        <item>17h30</item>
+        <item>18h00</item>
+        <item>18h30</item>
+        <item>19h00</item>
+        <item>19h30</item>
+        <item>20h00</item>
+        <item>20h30</item>
+        <item>21h00</item>
+        <item>21h30</item>
+        <item>22h00</item>
+        <item>22h30</item>
+        <item>23h00</item>
+        <item>23h30</item>
+    </string-array>
 
     <string-array name="Rooms_Array">
         <item>Room1</item>

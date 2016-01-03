@@ -64,15 +64,13 @@ public class MainActivity extends ActionBarActivity
                 int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
                 int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
                 String sYear = String.valueOf(year);
-                String sMonth = String.valueOf(month);
+                String sMonth = MonthsUtil.monthToString(month);
                 String sDay = String.valueOf(day);
                 if (day < 10)
                     sDay="0"+sDay;
-                if (month < 10)
-                    sMonth="0"+sMonth;
 
 
-                mDateText.setText(sDay+"/"+sMonth+"/"+sYear);
+                mDateText.setText(sDay+" "+sMonth+" "+sYear);
                 mDateText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -80,20 +78,18 @@ public class MainActivity extends ActionBarActivity
                         //To show current date in the datepicker
                         Calendar mcurrentDate = Calendar.getInstance();
                         int mYear = mcurrentDate.get(Calendar.YEAR);
-                        int mMonth = mcurrentDate.get(Calendar.MONTH) + 1;//Cause months start at 0
+                        final int mMonth = mcurrentDate.get(Calendar.MONTH) + 1;//Cause months start at 0
                         int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
                         DatePickerDialog mDatePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                                 // TODO Auto-generated method stub
                                 String year = String.valueOf(selectedYear);
-                                String month = String.valueOf(selectedMonth);
+                                String month = MonthsUtil.monthToString(mMonth);
                                 String day = String.valueOf(selectedDay);
                                 if (selectedDay < 10)
                                     day="0"+day;
-                                if (selectedMonth < 10)
-                                    month="0"+month;
-                                mDateText.setText(day+"/"+month+"/"+year);
+                                mDateText.setText(day+" "+month+" "+year);
                             }
                         }, mYear, mMonth, mDay);
                         mDatePicker.setTitle("Select date");
