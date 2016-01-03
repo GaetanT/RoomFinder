@@ -6,11 +6,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -21,6 +21,7 @@
                 android:textStyle="bold"
                 android:id="@+id/textView5"
                 android:gravity="center"
+                android:layout_marginTop="20dp"
                 />
 
 
@@ -39,56 +40,81 @@
                 android:textStyle="bold"
                 android:id="@+id/textView"
                 android:gravity="center"
-                android:layout_marginTop="33dp" />
+                android:layout_marginTop="33dp"
+                android:layout_marginBottom="15dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginBottom="@dimen/bottomItemMargin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Site:"
+                    android:id="@+id/textView6"
+                    android:textAlignment="center"
+                    />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner"
+                    android:choiceMode="singleChoice"
+                    android:clickable="true"
+                    android:entries="@array/Sites_Array"
+                    />
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Site:"
-                android:id="@+id/textView6"
-                android:textAlignment="center"
-                />
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:choiceMode="singleChoice"
-                android:clickable="true"
-                android:entries="@array/Sites_Array"
-                />
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginBottom="@dimen/bottomItemMargin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date:"
+                    android:id="@+id/textView7"
+                    android:textAlignment="center"
+                    />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date:"
-                android:id="@+id/textView7"
-                android:textAlignment="center"
-                />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date"
+                    android:ems="5"
+                    android:focusable="false"
+                    android:layout_marginLeft="5dp"
+                    android:textAlignment="center"
+                    android:background="@android:color/transparent"
+                    />
+            </LinearLayout>
 
-            <!--
-            <DatePicker
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/datePicker"
-                android:datePickerMode="calendar"
-                android:calendarViewShown="false"
-                android:spinnersShown="false"/>
-            -->
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginBottom="@dimen/bottomItemMargin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Number of people:"
+                    android:id="@+id/textView3"
+                    android:textAlignment="center"
+                    />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:ems="2"
+                    android:id="@+id/editText4"
+                    android:layout_marginLeft="5dp"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Number of people:"
-                android:id="@+id/textView3"
-                android:textAlignment="center"
-                />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="numberSigned"
-                android:ems="10"
-                android:id="@+id/editText4"
-                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,12 +122,17 @@
                 android:text="Equipment:"
                 android:id="@+id/textView9"
                 android:textAlignment="center"
+                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginBottom="5dp"
+
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/bottomItemMargin"
+                android:layout_marginLeft="@dimen/leftMarginSearch"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -160,14 +191,20 @@
                             android:entries="@array/Equipments_Array"
                             />
                             -->
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SEARCH"
-                android:id="@+id/button"
-                android:layout_gravity="center"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SEARCH"
+                    android:id="@+id/button"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

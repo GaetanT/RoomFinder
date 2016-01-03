@@ -1,6 +1,7 @@
 package insa.roomfinder;
 
-import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.sax.TextElementListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
@@ -8,12 +9,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -28,6 +28,9 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    private EditText mDateText;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     @Override
@@ -53,6 +57,49 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 1:
                 fragmentManager.beginTransaction().replace(R.id.container, Search.newInstance(position + 1)).commit();
+                getSupportFragmentManager().executePendingTransactions(); //Pour etre sur que la transaction est bien terminée, sinon ca bug
+                mDateText = (EditText) findViewById(R.id.date);
+                Calendar mcurrentDate = Calendar.getInstance();
+                int year = mcurrentDate.get(Calendar.YEAR);
+                int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
+                int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                String sYear = String.valueOf(year);
+                String sMonth = String.valueOf(month);
+                String sDay = String.valueOf(day);
+                if (day < 10)
+                    sDay="0"+sDay;
+                if (month < 10)
+                    sMonth="0"+sMonth;
+
+
+                mDateText.setText(sDay+"/"+sMonth+"/"+sYear);
+                mDateText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        //To show current date in the datepicker
+                        Calendar mcurrentDate = Calendar.getInstance();
+                        int mYear = mcurrentDate.get(Calendar.YEAR);
+                        int mMonth = mcurrentDate.get(Calendar.MONTH) + 1;//Cause months start at 0
+                        int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                        DatePickerDialog mDatePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                                // TODO Auto-generated method stub
+                                String year = String.valueOf(selectedYear);
+                                String month = String.valueOf(selectedMonth);
+                                String day = String.valueOf(selectedDay);
+                                if (selectedDay < 10)
+                                    day="0"+day;
+                                if (selectedMonth < 10)
+                                    month="0"+month;
+                                mDateText.setText(day+"/"+month+"/"+year);
+                            }
+                        }, mYear, mMonth, mDay);
+                        mDatePicker.setTitle("Select date");
+                        mDatePicker.show();
+                    }
+                });
                 break;
             case 2:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
@@ -61,7 +108,7 @@ public class MainActivity extends ActionBarActivity
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
                 break;
             case 4:
-                fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
+                fragmentManager.beginTransaction().replace(R.id.container, About.newInstance(position + 1)).commit();
                 break;
             default:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
@@ -106,7 +153,6 @@ public class MainActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -134,6 +180,4 @@ public class MainActivity extends ActionBarActivity
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }
