@@ -8,6 +8,6 @@ public class MonthsUtil {
 
     public static String monthToString (int month) {
         String[] months = {"Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Nov.", "Oct.", "Dec."};
-        return months[month+1];
+        return months[month-1];
     }
 }

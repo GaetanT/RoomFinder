@@ -1,12 +1,16 @@
 package insa.roomfinder;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
+
+import java.util.Calendar;
 
 /**
  * Created by pierre on 02/01/16.
@@ -24,6 +28,7 @@ public class Search extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
+    private EditText mDateText;
 
     public static Search newInstance(int sectionNumber) {
         Search fragment = new Search();
@@ -41,6 +46,49 @@ public class Search extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.search, container, false);
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mDateText = (EditText) getView().findViewById(R.id.date);
+        Calendar mcurrentDate = Calendar.getInstance();
+        int year = mcurrentDate.get(Calendar.YEAR);
+        int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
+        int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+        String sYear = String.valueOf(year);
+        String sMonth = MonthsUtil.monthToString(month);
+        String sDay = String.valueOf(day);
+        if (day < 10)
+            sDay="0"+sDay;
+
+
+        mDateText.setText(sDay+" "+sMonth+" "+sYear);
+        mDateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //To show current date in the datepicker
+                Calendar mcurrentDate = Calendar.getInstance();
+                int mYear = mcurrentDate.get(Calendar.YEAR);
+                final int mMonth = mcurrentDate.get(Calendar.MONTH) + 1;//Cause months start at 0
+                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
+                        // TODO Auto-generated method stub
+                        String year = String.valueOf(selectedYear);
+                        String month = MonthsUtil.monthToString(mMonth);
+                        String day = String.valueOf(selectedDay);
+                        if (selectedDay < 10)
+                            day="0"+day;
+                        mDateText.setText(day+" "+month+" "+year);
+                    }
+                }, mYear, mMonth-1, mDay);
+                mDatePicker.setTitle("Select date");
+                mDatePicker.show();
+            }
+        });
 
     }
 
