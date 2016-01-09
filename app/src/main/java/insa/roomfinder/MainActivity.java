@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 1:
                 fragmentManager.beginTransaction().replace(R.id.container, Search.newInstance(position + 1)).commit();
-                getSupportFragmentManager().executePendingTransactions(); //Pour etre sur que la transaction est bien terminée, sinon ca bug
+                //getSupportFragmentManager().executePendingTransactions(); //Pour etre sur que la transaction est bien terminée, sinon ca bug
                 break;
             case 2:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();

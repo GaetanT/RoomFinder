@@ -10,7 +10,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:focusable="true"
             android:focusableInTouchMode="true">
@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Search by room"
+                android:text="@string/searchByRoom"
                 android:textStyle="bold"
                 android:id="@+id/textView5"
                 android:gravity="center"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Search with filters"
+                android:text="@string/searchWithFilters"
                 android:textStyle="bold"
                 android:id="@+id/textView"
                 android:gravity="center"
@@ -48,13 +48,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginStart="@dimen/leftMarginSearch"
                 android:layout_marginBottom="@dimen/bottomItemMargin"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Site:"
+                    android:text="@string/site"
                     android:id="@+id/textView6"
                     android:textAlignment="center"
                     />
@@ -72,12 +72,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginStart="@dimen/leftMarginSearch"
                 android:layout_marginBottom="@dimen/bottomItemMargin">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date:"
+                    android:text="@string/date"
                     android:id="@+id/textView7"
                     android:textAlignment="center"
                     />
@@ -88,16 +88,17 @@
                     android:id="@+id/date"
                     android:ems="6"
                     android:focusable="false"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:textAlignment="center"
                     android:background="@android:color/transparent"
                     android:textSize="16sp"
+                    android:inputType="date"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Starting at:"
-                    android:layout_marginLeft="5dp"
+                    android:text="@string/startingAt"
+                    android:layout_marginStart="5dp"
                     android:id="@+id/hourView"
                     />
                 <Spinner
@@ -114,18 +115,18 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/leftMarginSearch">
+                android:layout_marginStart="@dimen/leftMarginSearch">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lenght:"/>
+                    android:text="@string/length"/>
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/lenghtSpinner"
+                    android:id="@+id/lengthSpinner"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:entries="@array/Lenght_Array"
+                    android:entries="@array/Length_Array"
                     />
 
             </LinearLayout>
@@ -134,12 +135,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/leftMarginSearch"
-                android:layout_marginBottom="@dimen/bottomItemMargin">
+                android:layout_marginStart="@dimen/leftMarginSearch"
+                android:layout_marginBottom="6dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Number of people:"
+                    android:text="@string/numberOfPeople"
                     android:id="@+id/textView3"
                     android:textAlignment="center"
                     />
@@ -149,10 +150,10 @@
                     android:inputType="numberSigned"
                     android:ems="2"
                     android:id="@+id/editText4"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:textSize="16sp"
                     android:textAlignment="textEnd"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:maxLength="3"
                     />
             </LinearLayout>
@@ -161,10 +162,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Equipment:"
+                android:text="@string/equipment"
                 android:id="@+id/textView9"
                 android:textAlignment="center"
-                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginStart="@dimen/leftMarginSearch"
                 android:layout_marginBottom="5dp"
 
                 />
@@ -174,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/bottomItemMargin"
-                android:layout_marginLeft="@dimen/leftMarginSearch"
+                android:layout_marginStart="@dimen/leftMarginSearch"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -186,19 +187,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/visio"
-                        android:text="visio"
+                        android:text="@string/visio"
                         />
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/phone"
-                        android:text="phone"
+                        android:text="@string/phone"
                         />
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/secured"
-                        android:text="secured"
+                        android:text="@string/secured"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -212,19 +213,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/digilab"
-                        android:text="digilab"
+                        android:text="@string/digilab"
                         />
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/blackboard"
-                        android:text="blackboard"
+                        android:text="@string/blackboard"
                         />
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/tv"
-                        android:text="tv"
+                        android:text="@string/tv"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -241,7 +242,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SEARCH"
+                    android:text="@string/search"
                     android:id="@+id/button"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"

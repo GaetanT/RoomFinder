@@ -7,10 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.io.IOException;
 import java.util.Calendar;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by pierre on 02/01/16.
@@ -29,6 +36,8 @@ public class Search extends Fragment {
      * number.
      */
     private EditText mDateText;
+    private Button mSearchButton;
+    private Ni mNi;
 
     public static Search newInstance(int sectionNumber) {
         Search fragment = new Search();
@@ -51,13 +60,17 @@ public class Search extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        NetworkInterface networkInterface = new RestAdapter.Builder().setEndpoint(NetworkInterface.ENDPOINT).build().create(NetworkInterface.class);
+
+        mSearchButton = (Button) getView().findViewById(R.id.button);
         mDateText = (EditText) getView().findViewById(R.id.date);
         Calendar mcurrentDate = Calendar.getInstance();
         int year = mcurrentDate.get(Calendar.YEAR);
         int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
         int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
         String sYear = String.valueOf(year);
-        String sMonth = MonthsUtil.monthToString(month);
+        String sMonth = MonthsUtil.monthToString(month, getActivity().getApplicationContext());
         String sDay = String.valueOf(day);
         if (day < 10)
             sDay="0"+sDay;
@@ -78,15 +91,33 @@ public class Search extends Fragment {
                     public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                         // TODO Auto-generated method stub
                         String year = String.valueOf(selectedYear);
-                        String month = MonthsUtil.monthToString(mMonth);
+                        String month = MonthsUtil.monthToString(selectedMonth + 1, getActivity().getApplicationContext());
                         String day = String.valueOf(selectedDay);
                         if (selectedDay < 10)
-                            day="0"+day;
-                        mDateText.setText(day+" "+month+" "+year);
+                            day = "0" + day;
+                        mDateText.setText(day + " " + month + " " + year);
                     }
-                }, mYear, mMonth-1, mDay);
+                }, mYear, mMonth - 1, mDay);
                 mDatePicker.setTitle("Select date");
                 mDatePicker.show();
+            }
+        });
+
+        mSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String xml = "<request></request>";
+                mNi.sendXMLRequest(xml, new Callback<Void>() {
+                    @Override
+                    public void success(Void aVoid, Response response) {
+                        System.out.println("Success : " + response);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        System.out.println("Error : " + error);
+                    }
+                });
             }
         });
 
@@ -95,7 +126,6 @@ public class Search extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+        ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
     }
 }

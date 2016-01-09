@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="searchByRoom">Search By Room</string>
+    <string name="searchWithFilters">Search with filters</string>
+    <string name="site">Site:</string>
+    <string name="date">Date:</string>
+    <string name="startingAt">Starting at:</string>
+    <string name="length">Length:</string>
+    <string name="numberOfPeople">Number of people:</string>
+    <string name="equipment">Equipment:</string>
+    <string name="search">SEARCH</string>
 
     <string name="app_name">RoomFinder</string>
     <string name="title_activity_main">MainActivity</string>
@@ -20,8 +30,22 @@
         <item>Sopra Ramassiers</item>
         <item>Sopra Albi</item>
     </string-array>
+    <string-array name="Months_Array">
+        <item>Jan.</item>
+        <item>Feb.</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>Aug.</item>
+        <item>Sept.</item>
+        <item>Nov.</item>
+        <item>Oct.</item>
+        <item>Dec.</item>
+    </string-array>
     
-    <string-array name="Lenght_Array">
+    <string-array name="Length_Array">
         <item>30min</item>
         <item>1h00</item>
         <item>1h30</item>
@@ -114,13 +138,12 @@
         <item>Room20</item>
     </string-array>
 
-    <string-array name="Equipments_Array">
-        <item>none</item>
-        <item>visio</item>
-        <item>phone</item>
-        <item>secured</item>
-        <item>Digilab</item>
-    </string-array>
-
+    <string name="none">none</string>
+    <string name="visio">visio</string>
+    <string name="phone">phone</string>
+    <string name="secured">secured</string>
+    <string name="digilab">Digilab</string>
+    <string name="blackboard">blackboard</string>
+    <string name="tv">TV</string>
 
 </resources>
