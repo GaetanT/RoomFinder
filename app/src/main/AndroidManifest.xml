@@ -30,6 +30,11 @@
             <!-- android:screenOrientation="sensorPortrait" -->
 
         </activity>
+        <activity
+            android:name=".ListeSalles"
+            android:label="@string/listesalles"
+            android:screenOrientation="sensorPortrait">
+        </activity>
     </application>
 
 </manifest>

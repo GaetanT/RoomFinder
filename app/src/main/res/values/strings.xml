@@ -13,6 +13,7 @@
 
     <string name="app_name">RoomFinder</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="listesalles">ListeSalles</string>
     <string name="title_section1">Favorite Rooms</string>
     <string name="title_section2">Search</string>
     <string name="title_section3">Profile</string>
