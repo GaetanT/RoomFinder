@@ -1,29 +1,20 @@
 package insa.roomfinder;
 
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import retrofit.http.Query;
+import retrofit.Call;
+import retrofit.http.Body;
 
 /**
  * Created by pierre on 03/01/16.
  * That's the Network Interface
  */
-public class Ni implements NetworkInterface{
+public class Ni{
 
     //Singleton pattern
     private static Ni INSTANCE = new Ni();
     private Ni() {}
     public static Ni getInstance() {return INSTANCE;}
 
-    @Override
-    public void sendXMLRequest(@Query("xml") String xml, retrofit.Callback<Void> callback) {
-
-    }
 
     /*
        try {

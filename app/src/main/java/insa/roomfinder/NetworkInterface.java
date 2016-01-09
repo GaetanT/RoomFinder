@@ -1,13 +1,15 @@
 package insa.roomfinder;
 
-import retrofit.Callback;
 import retrofit.http.*;
+import retrofit.Call;
 /**
  * Created by pierre on 09/01/16.
  */
 public interface NetworkInterface {
-    String ENDPOINT = "http://192.168.0.101:8080/Sopra_Online_Server/webresources";
+    String ENDPOINT = "http://192.168.0.101:8080/Sopra_Online_Server/webresources/search";
 
+
+    @Headers("Content-type: application/xml; charset=utf-8")
     @POST("/search")
-    void sendXMLRequest(@Query("xml") String xml, Callback<Void> callback);
+    Call<Void> sendXMLRequest(@Body String xml);
 }

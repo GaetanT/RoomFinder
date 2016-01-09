@@ -11,13 +11,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.io.IOException;
 import java.util.Calendar;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit.Response;
+import retrofit.Retrofit;
+import retrofit.SimpleXmlConverterFactory;
 
 /**
  * Created by pierre on 02/01/16.
@@ -37,7 +36,7 @@ public class Search extends Fragment {
      */
     private EditText mDateText;
     private Button mSearchButton;
-    private Ni mNi;
+    private NetworkInterface mNi;
 
     public static Search newInstance(int sectionNumber) {
         Search fragment = new Search();
@@ -61,7 +60,7 @@ public class Search extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        NetworkInterface networkInterface = new RestAdapter.Builder().setEndpoint(NetworkInterface.ENDPOINT).build().create(NetworkInterface.class);
+        mNi = new Retrofit.Builder().baseUrl(NetworkInterface.ENDPOINT).addConverterFactory(SimpleXmlConverterFactory.create()).build().create(NetworkInterface.class);
 
         mSearchButton = (Button) getView().findViewById(R.id.button);
         mDateText = (EditText) getView().findViewById(R.id.date);
@@ -107,15 +106,15 @@ public class Search extends Fragment {
             @Override
             public void onClick(View v) {
                 String xml = "<request></request>";
-                mNi.sendXMLRequest(xml, new Callback<Void>() {
+                mNi.sendXMLRequest(xml).enqueue(new Callback<Void>() {
                     @Override
-                    public void success(Void aVoid, Response response) {
-                        System.out.println("Success : " + response);
+                    public void onResponse(Response<Void> response, Retrofit retrofit) {
+                        System.out.println("SUCCESS");
                     }
 
                     @Override
-                    public void failure(RetrofitError error) {
-                        System.out.println("Error : " + error);
+                    public void onFailure(Throwable t) {
+                        System.out.println("ERROR : " + t);
                     }
                 });
             }
