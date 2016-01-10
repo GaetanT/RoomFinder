@@ -67,6 +67,8 @@ public class MainActivity extends ActionBarActivity
             @Override
             public void onFailure(Throwable t) {
                 System.out.println("Rooms not retrieved...");
+                t.printStackTrace();
+                System.out.println(t.getMessage() + "/" + t.toString());
             }
         });
 

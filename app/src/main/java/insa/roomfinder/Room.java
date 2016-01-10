@@ -14,7 +14,7 @@ public class Room {
     @Element(name="rfName")
     private String name;
 
-    @Root(name="rfSite")
+    @Element(name="rfSite")
     private Site site;
 
     @Element(name = "rfSize")
