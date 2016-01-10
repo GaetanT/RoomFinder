@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by pierre on 02/01/16.
  */
@@ -36,6 +38,7 @@ public class Profile extends Fragment {
     Button mProfileButton;
     Spinner mSiteSpinner;
     Spinner mFavoriteRoomSpinner;
+    ArrayList<String> mRoomsName;
 
     public static Profile newInstance(int sectionNumber) {
         Profile fragment = new Profile();
@@ -71,6 +74,7 @@ public class Profile extends Fragment {
         mSiteSpinner = (Spinner) getView().findViewById(R.id.siteSpinner);
         mFavoriteRoomSpinner = (Spinner) getView().findViewById(R.id.favoriteRoomSpinner);
         mProfileButton = (Button) getView().findViewById(R.id.profileButton);
+        mRoomsName = Data.getInstance().getRoomsName();
 
         SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String fullName = sharedPreferences.getString("fullName", "");
@@ -88,7 +92,8 @@ public class Profile extends Fragment {
             int spinnerPosition = adapter.getPosition(site);
             mSiteSpinner.setSelection(spinnerPosition);
         }
-        ArrayAdapter<CharSequence> adapterBis = ArrayAdapter.createFromResource(getView().getContext(), R.array.Rooms_Array, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapterBis = ArrayAdapter.createFromResource(getView().getContext(), R.array.Rooms_Array , android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapterBis = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mRoomsName);
         adapterBis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mFavoriteRoomSpinner.setAdapter(adapterBis);
         if (!mFavoriteRoomSpinner.equals(null)) {

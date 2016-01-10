@@ -12,8 +12,20 @@ import java.util.ArrayList;
 @Root(name="rooms")
 public class Rooms {
 
+    /* attributes */
     @ElementList(inline = true)
     private ArrayList<Room> mRooms;
+
+    /* Constructors */
+    public Rooms() {
+        mRooms = new ArrayList<>();
+    }
+
+
+    /* Methods */
+    public void setmRooms(ArrayList<Room> mRooms) {
+        this.mRooms = mRooms;
+    }
 
     public ArrayList<Room> getmRooms() {
         return mRooms;
@@ -21,5 +33,14 @@ public class Rooms {
 
     public void addRoom(Room room) {
         mRooms.add(room);
+    }
+
+    public ArrayList<String> getRoomsName() {
+        System.out.println("Je suis dans le getRoomsName de Rooms");
+        ArrayList<String> roomsName = new ArrayList<>();
+        for (Room room : mRooms) {
+            roomsName.add(room.getName());
+        }
+        return roomsName;
     }
 }

@@ -34,7 +34,7 @@ import java.util.List;
             SalleViewHolder viewHolder = (SalleViewHolder) convertView.getTag();
             if(viewHolder == null){
                 viewHolder = new SalleViewHolder();
-                viewHolder.nom = (TextView) convertView.findViewById(R.id.nom);
+                viewHolder.nom = (TextView) convertView.findViewById(R.id.name);
                 viewHolder.info = (TextView) convertView.findViewById(R.id.info);
                 viewHolder.dispo = (ImageView) convertView.findViewById(R.id.dispo);
                 convertView.setTag(viewHolder);

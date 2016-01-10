@@ -11,11 +11,11 @@ public class Room {
     @Element(name="rfId")
     private double id;
 
-    @Element(name="rfSite")
-    private String Site;
-
     @Element(name="rfName")
     private String name;
+
+    @Root(name="rfSite")
+    private Site site;
 
     @Element(name = "rfSize")
     private int size;

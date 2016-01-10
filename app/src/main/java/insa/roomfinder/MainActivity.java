@@ -20,6 +20,7 @@ import java.util.Calendar;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import retrofit.SimpleXmlConverterFactory;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -33,6 +34,8 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private Data data;
+    private NetworkInterface mNi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,27 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        //Retrieve the rooms from the server
+        mNi = new Retrofit.Builder().baseUrl(NetworkInterface.ENDPOINT).addConverterFactory(SimpleXmlConverterFactory.create()).build().create(NetworkInterface.class);
+        data = Data.getInstance();
+
+        mNi.getRooms().enqueue(new Callback<Rooms>() {
+            @Override
+            public void onResponse(Response<Rooms> response, Retrofit retrofit) {
+                data.setmRooms(response.body());
+                System.out.println("Response : " + response.code() + "/" + response.isSuccess() + "/" + response.errorBody() + "/" + response.message());
+                System.out.println("Rooms retrieved.");
+                System.out.println(response.body());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                System.out.println("Rooms not retrieved...");
+            }
+        });
+
+
 
     }
 
