@@ -1,6 +1,7 @@
 package insa.roomfinder;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.sax.TextElementListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -10,10 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Calendar;
+
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -29,6 +35,8 @@ public class MainActivity extends ActionBarActivity
     private CharSequence mTitle;
 
     private EditText mDateText;
+
+    private Button mSearchButton;
 
 
     @Override
@@ -58,7 +66,7 @@ public class MainActivity extends ActionBarActivity
             case 1:
                 fragmentManager.beginTransaction().replace(R.id.container, Search.newInstance(position + 1)).commit();
                 //getSupportFragmentManager().executePendingTransactions(); //Pour etre sur que la transaction est bien terminée, sinon ca bug
-                break;
+            break;
             case 2:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
                 break;

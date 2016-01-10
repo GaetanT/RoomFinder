@@ -2,6 +2,7 @@ package insa.roomfinder;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -109,6 +110,10 @@ public class Search extends Fragment {
                 mNi.sendXMLRequest(xml).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Response<Void> response, Retrofit retrofit) {
+                        // Il faudra changer la liste des salles a afficher
+                        // Faire de Liste Salles un fragment, pour tester tu peux afficher la liste de salle apres le login
+                       // Intent intent = new Intent(MainActivity.this, ListeSalles.class);
+                       // startActivity(intent);
                         System.out.println("SUCCESS");
                     }
 
