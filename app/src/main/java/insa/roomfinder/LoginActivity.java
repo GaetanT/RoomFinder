@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -268,6 +269,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 String[] pieces = DUMMY_CREDENTIALS[0].split(":");
                 if (pieces[0].equals(mEmail)) {
                     return pieces[1].equals(mPassword); // Account exists, return true if the password matches.
+
+
                 } else {
                     //return false;
                     return true; // For the moment, always connecting
@@ -282,6 +285,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
+                //Stored the mail and password for the next connection :
+                SharedPreferences sharedPreferences = getSharedPreferences("Profile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("mail", mEmail);
+                editor.putString("password", mPassword);
+                editor.apply();
+
                 finish();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

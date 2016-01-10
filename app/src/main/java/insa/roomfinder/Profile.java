@@ -1,11 +1,19 @@
 package insa.roomfinder;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by pierre on 02/01/16.
@@ -21,6 +29,14 @@ public class Profile extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
+
+    EditText mMailEditText;
+    EditText mFullNameEditText;
+    EditText mPhoneNumberEditText;
+    Button mProfileButton;
+    Spinner mSiteSpinner;
+    Spinner mFavoriteRoomSpinner;
+
     public static Profile newInstance(int sectionNumber) {
         Profile fragment = new Profile();
         Bundle args = new Bundle();
@@ -44,5 +60,69 @@ public class Profile extends Fragment {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mFullNameEditText = (EditText) getView().findViewById(R.id.fullNameEditText);
+        mMailEditText = (EditText) getView().findViewById(R.id.mailProfile);
+        mPhoneNumberEditText = (EditText) getView().findViewById(R.id.phoneNumberEditText);
+        mSiteSpinner = (Spinner) getView().findViewById(R.id.siteSpinner);
+        mFavoriteRoomSpinner = (Spinner) getView().findViewById(R.id.favoriteRoomSpinner);
+        mProfileButton = (Button) getView().findViewById(R.id.profileButton);
+
+        SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
+        String fullName = sharedPreferences.getString("fullName", "");
+        String mail = sharedPreferences.getString("mail","");
+        String phoneNumber = sharedPreferences.getString("phoneNumber","");
+        String site = sharedPreferences.getString("site","");
+        String favoriteRoom = sharedPreferences.getString("favoriteRoom","");
+        mFullNameEditText.setText(fullName);
+        mMailEditText.setText(mail);
+        mPhoneNumberEditText.setText(phoneNumber);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getView().getContext(), R.array.Sites_Array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSiteSpinner.setAdapter(adapter);
+        if (!mSiteSpinner.equals(null)) {
+            int spinnerPosition = adapter.getPosition(site);
+            mSiteSpinner.setSelection(spinnerPosition);
+        }
+        ArrayAdapter<CharSequence> adapterBis = ArrayAdapter.createFromResource(getView().getContext(), R.array.Rooms_Array, android.R.layout.simple_spinner_item);
+        adapterBis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mFavoriteRoomSpinner.setAdapter(adapterBis);
+        if (!mFavoriteRoomSpinner.equals(null)) {
+            int spinnerPositionBis = adapterBis.getPosition(favoriteRoom);
+            mFavoriteRoomSpinner.setSelection(spinnerPositionBis);
+        }
+
+
+
+
+        mProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fullName = mFullNameEditText.getText().toString();
+                String mail =  mMailEditText.getText().toString();
+                String phoneNumber = mPhoneNumberEditText.getText().toString();
+                String site = mSiteSpinner.getSelectedItem().toString();
+                String favoriteRoom = mFavoriteRoomSpinner.getSelectedItem().toString();
+
+                SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("fullName", fullName);
+                editor.putString("mail", mail);
+                editor.putString("phoneNumber", phoneNumber);
+                editor.putString("site", site);
+                editor.putString("favoriteRoom", favoriteRoom);
+                editor.apply();
+
+                Toast toast = Toast.makeText(getView().getContext(), "New profile saved", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, -500);
+                toast.show();
+            }
+        });
+
+
     }
 }
