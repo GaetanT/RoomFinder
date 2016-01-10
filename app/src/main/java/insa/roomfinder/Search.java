@@ -112,7 +112,7 @@ public class Search extends Fragment {
                     public void onResponse(Response<Void> response, Retrofit retrofit) {
                         // Il faudra changer la liste des salles a afficher
                         // Faire de Liste Salles un fragment, pour tester tu peux afficher la liste de salle apres le login
-                       // Intent intent = new Intent(MainActivity.this, ListeSalles.class);
+                       // Intent intent = new Intent(MainActivity.this, ResultActivity.class);
                        // startActivity(intent);
                         System.out.println("SUCCESS");
                     }

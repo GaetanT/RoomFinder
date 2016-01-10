@@ -31,7 +31,7 @@
 
         </activity>
         <activity
-            android:name=".ListeSalles"
+            android:name=".ResultActivity"
             android:label="@string/listesalles"
             android:screenOrientation="sensorPortrait">
         </activity>

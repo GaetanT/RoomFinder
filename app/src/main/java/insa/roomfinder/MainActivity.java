@@ -34,11 +34,6 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
-    private EditText mDateText;
-
-    private Button mSearchButton;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +60,6 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 1:
                 fragmentManager.beginTransaction().replace(R.id.container, Search.newInstance(position + 1)).commit();
-                //getSupportFragmentManager().executePendingTransactions(); //Pour etre sur que la transaction est bien terminée, sinon ca bug
             break;
             case 2:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();

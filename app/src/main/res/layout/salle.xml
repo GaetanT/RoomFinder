@@ -15,7 +15,7 @@
         />
 
     <TextView
-        android:id="@+id/nom"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -31,9 +31,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        android:layout_alignLeft="@+id/nom"
-        android:layout_below="@+id/nom"
-        tools:text="Infos sur la salle"
+        android:layout_alignLeft="@+id/name"
+        android:layout_below="@+id/name"
+        tools:text="Infos sur la room"
         />
 
 </RelativeLayout>

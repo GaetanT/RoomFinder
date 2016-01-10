@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * Created by Gaetan on 09/01/2016.
  */
-    public class SalleAdapter extends ArrayAdapter<Salle> {
+    public class RoomAdapter extends ArrayAdapter<Room> {
 
-        //salles est la liste des models à afficher
-        public SalleAdapter(Context context, List<Salle> salles) {
-            super(context, 0, salles);
+        //rooms est la liste des models à afficher
+        public RoomAdapter(Context context, List<Room> rooms) {
+            super(context, 0, rooms);
         }
 
         @Override
@@ -40,18 +40,19 @@ import java.util.List;
                 convertView.setTag(viewHolder);
             }
 
-            //getItem(position) va récupérer l'item [position] de la List<Salle> salles
-            Salle salle = getItem(position);
+            //getItem(position) va récupérer l'item [position] de la List<Room> salles
+            Room room = getItem(position);
 
             //il ne reste plus qu'à remplir notre vue
-            viewHolder.nom.setText(salle.getNom());
-            viewHolder.info.setText(salle.getInfo());
-            if(salle.isDispo()){
+            viewHolder.nom.setText(room.getName());
+            //viewHolder.info.setText(room.getInfo());
+            /*if(room.isDispo()){
                 couleur= Color.GREEN;
             }else{
                 couleur=Color.RED;
             }
-            viewHolder.dispo.setImageDrawable(new ColorDrawable(couleur));
+            */
+            //viewHolder.dispo.setImageDrawable(new ColorDrawable(couleur));
 
             return convertView;
         }
