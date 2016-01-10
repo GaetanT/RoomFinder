@@ -7,8 +7,7 @@ import retrofit.Call;
  */
 public interface NetworkInterface {
     String ENDPOINT = "http://192.168.0.101:8080/Sopra_Online_Server/webresources/";
-
-
+    
     @Headers("Content-type: application/xml; charset=utf-8")
     @POST("search")
     Call<Void> sendXMLRequest(@Body String xml);
@@ -16,5 +15,4 @@ public interface NetworkInterface {
     @Headers("Content-type: application/xml; charset=utf-8")
     @GET("room")
     Call<Rooms> getRooms();
-
 }

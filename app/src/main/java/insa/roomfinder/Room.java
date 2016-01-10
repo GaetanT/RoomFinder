@@ -20,8 +20,18 @@ public class Room {
     @Element(name = "rfSize")
     private int size;
 
+    public Room() {
+    }
+
     public Room(String name) {
         this.name = name;
+    }
+
+    public Room(double id, String name, Site site, int size) {
+        this.id = id;
+        this.name = name;
+        this.site = site;
+        this.size = size;
     }
 
     public String getName() {

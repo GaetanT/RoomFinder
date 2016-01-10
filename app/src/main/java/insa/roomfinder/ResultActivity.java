@@ -24,6 +24,7 @@ public class ResultActivity extends Activity {
         mListView.setAdapter(adapter);
     }
 
+
     private List<Room> genererSalles(){
         List<Room> rooms = new ArrayList<>();
         rooms.add(new Room("Salle1"));
@@ -33,4 +34,5 @@ public class ResultActivity extends Activity {
         rooms.add(new Room("Salle5"));
         return rooms;
     }
+
 }
