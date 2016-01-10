@@ -26,6 +26,7 @@
     <string name="action_search_by_room">Search</string>
 
     <string-array name="Sites_Array">
+        <item></item>
         <item>Sopra Colo 1</item>
         <item>Sopra Colo 2</item>
         <item>Sopra Ramassiers</item>
@@ -117,6 +118,7 @@
     </string-array>
 
     <string-array name="Rooms_Array">
+        <item></item>
         <item>Room1</item>
         <item>Room2</item>
         <item>Room3</item>

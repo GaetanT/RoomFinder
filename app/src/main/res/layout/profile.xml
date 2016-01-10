@@ -33,7 +33,7 @@
                     android:hint="Full name"
                     android:layout_marginStart="15dp"
                     android:ems="12"
-                    android:id="@+id/editText"
+                    android:id="@+id/fullNameEditText"
                     />
             </LinearLayout>
             <LinearLayout
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="12"
-                    android:id="@+id/editText2"
+                    android:id="@+id/mailProfile"
                     android:hint="Mail address"
                     android:layout_marginStart="15dp"
                     />
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:ems="12"
-                    android:id="@+id/editText3"
+                    android:id="@+id/phoneNumberEditText"
                     android:hint="Phone number"
                     android:layout_marginStart="15dp"
                     />
@@ -100,7 +100,7 @@
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner"
+                    android:id="@+id/siteSpinner"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
                     android:entries="@array/Sites_Array"
@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Favorite Rooms: "
+                    android:text="Favorite Room: "
                     android:id="@+id/textView10"
                     android:textAlignment="center"
                     android:textSize="19sp"
@@ -131,7 +131,7 @@
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner1"
+                    android:id="@+id/favoriteRoomSpinner"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
                     android:entries="@array/Rooms_Array" />
