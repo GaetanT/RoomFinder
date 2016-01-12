@@ -86,7 +86,7 @@ public class Search extends Fragment {
         AutoCompleteTextView textView = (AutoCompleteTextView) getView().findViewById(R.id.searchView);
         textView.setAdapter(adapter);
 
-       // Utiliser Data.getInstance().getRoomsName())
+       // Utiliser Data.getInstance().getRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
 
         mDateText.setText(sDay+" "+sMonth+" "+sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
