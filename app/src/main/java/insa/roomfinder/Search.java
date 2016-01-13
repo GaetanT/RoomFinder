@@ -2,14 +2,13 @@ package insa.roomfinder;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -62,6 +61,10 @@ public class Search extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.search, container, false);
     }
+// A enlever quand ce sera bindé avec les rooms
+    private static final String[] COUNTRIES = new String[] {
+            "Belgium", "France", "Italy", "Germany", "Spain"
+    };
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -85,7 +88,13 @@ public class Search extends Fragment {
         if (day < 10)
             sDay="0"+sDay;
 
-        mDateText.setText(sDay + " " + sMonth + " " + sYear);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.item_list_row, COUNTRIES);
+        AutoCompleteTextView textView = (AutoCompleteTextView) getView().findViewById(R.id.searchView);
+        textView.setAdapter(adapter);
+
+       // Utiliser Data.getInstance().getRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
+
+        mDateText.setText(sDay+" "+sMonth+" "+sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
