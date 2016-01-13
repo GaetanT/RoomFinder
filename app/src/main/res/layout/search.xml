@@ -24,15 +24,39 @@
                 android:id="@+id/textView5"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
                 />
 
-
-            <AutoCompleteTextView
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/searchView"
-                android:iconifiedByDefault="false"
-                />
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/leftMarginSearch"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Room:"
+                    android:gravity="center_vertical"/>
+
+
+                <AutoCompleteTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchView"
+                    android:iconifiedByDefault="false"
+                    android:ems="13"
+                    android:layout_gravity="center"
+                    android:hint="Room's name"
+                    android:imeActionLabel="Search"
+                    android:imeOptions="actionUnspecified"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_marginStart="5dp"
+                    android:textSize="18sp"
+                    android:inputType="textFilter"
+                    />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

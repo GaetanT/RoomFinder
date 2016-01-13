@@ -2,6 +2,8 @@ package insa.roomfinder;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -44,6 +46,7 @@ public class Search extends Fragment {
     private NetworkInterface mNi;
     private Spinner mSiteSpinner;
     private ArrayList<String> mSitesName;
+    private ArrayList<String> mRoomsName;
 
     public static Search newInstance(int sectionNumber) {
         Search fragment = new Search();
@@ -61,10 +64,6 @@ public class Search extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.search, container, false);
     }
-// A enlever quand ce sera bindé avec les rooms
-    private static final String[] COUNTRIES = new String[] {
-            "Belgium", "France", "Italy", "Germany", "Spain"
-    };
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -76,6 +75,7 @@ public class Search extends Fragment {
         mDateText = (EditText) getView().findViewById(R.id.date);
         mSiteSpinner = (Spinner) getView().findViewById(R.id.spinner);
         mSitesName = Data.getInstance().getSitesName();
+        mRoomsName = Data.getInstance().getRoomsName();
 
 
         Calendar mcurrentDate = Calendar.getInstance();
@@ -88,13 +88,13 @@ public class Search extends Fragment {
         if (day < 10)
             sDay="0"+sDay;
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.item_list_row, COUNTRIES);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.item_list_row, mRoomsName);
         AutoCompleteTextView textView = (AutoCompleteTextView) getView().findViewById(R.id.searchView);
         textView.setAdapter(adapter);
 
        // Utiliser Data.getInstance().getRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
 
-        mDateText.setText(sDay+" "+sMonth+" "+sYear);
+        mDateText.setText(sDay + " " + sMonth + " " + sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,11 +144,11 @@ public class Search extends Fragment {
 
         SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String site = sharedPreferences.getString("site","");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSiteSpinner.setAdapter(adapter);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSiteSpinner.setAdapter(adapter2);
         if (!mSiteSpinner.equals(null)) {
-            int spinnerPosition = adapter.getPosition(site);
+            int spinnerPosition = adapter2.getPosition(site);
             mSiteSpinner.setSelection(spinnerPosition);
         }
 
