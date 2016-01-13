@@ -9,15 +9,21 @@ import org.simpleframework.xml.Root;
 
 @Root(name="connection")
 public class ConnectionResponse {
+    /* Attributes */
     @Element(name="connected")
     private Boolean mConnected;
 
-    public ConnectionResponse(Boolean connected) {
+    @Element(name="userId")
+    private Integer mUserId;
+
+    /* Constructors */
+    public ConnectionResponse(){}
+    public ConnectionResponse(Boolean connected, Integer id) {
         mConnected = connected;
+        mUserId = id;
     }
 
-    public ConnectionResponse(){}
-
+    /* Methods */
     public Boolean getmConnected() {
         return mConnected;
     }

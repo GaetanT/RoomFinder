@@ -3,6 +3,7 @@ package insa.roomfinder;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,9 +20,6 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import insa.roomfinder.requests.Request;
-import retrofit.Callback;
-import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.SimpleXmlConverterFactory;
 
@@ -124,21 +122,8 @@ public class Search extends Fragment {
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNi.sendXMLRequest(new Request()).enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Response<Void> response, Retrofit retrofit) {
-                        // Il faudra changer la liste des salles a afficher
-                        // Faire de Liste Salles un fragment, pour tester tu peux afficher la liste de salle apres le login
-                        // Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                        // startActivity(intent);
-                        System.out.println("SUCCESS -> " + response.code());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        System.out.println("ERROR : " + t);
-                    }
-                });
+                Intent intent = new Intent(getActivity(), ResultActivity.class);
+                startActivity(intent);
             }
         });
 

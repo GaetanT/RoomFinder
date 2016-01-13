@@ -3,9 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listView"
+    <android.support.v7.widget.RecyclerView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/Recycler_View"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="20dp"/>
 
 </RelativeLayout>

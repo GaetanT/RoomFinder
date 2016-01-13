@@ -1,68 +1,77 @@
 package insa.roomfinder;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Gaetan on 09/01/2016.
  */
-    public class RoomAdapter extends ArrayAdapter<Room> {
-        //rooms est la liste des models à afficher
-        public RoomAdapter(Context context, List<Room> rooms) {
-            super(context, 0, rooms);
+public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolder> {
+    //rooms est la liste des models à afficher
+    private ArrayList<Room> mDataset;
+
+    public RoomAdapter(ArrayList<Room> rooms) {
+            mDataset = rooms;
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public SalleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            int couleur;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.salle, parent, false);
 
-            if(convertView == null){
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.salle,parent, false);
-            }
+        SalleViewHolder vh = new SalleViewHolder(v);
+        return vh;
+    }
 
-            SalleViewHolder viewHolder = (SalleViewHolder) convertView.getTag();
-            if(viewHolder == null){
-                viewHolder = new SalleViewHolder();
-                viewHolder.nom = (TextView) convertView.findViewById(R.id.name);
-                viewHolder.info = (TextView) convertView.findViewById(R.id.info);
-                viewHolder.dispo = (ImageView) convertView.findViewById(R.id.dispo);
-                convertView.setTag(viewHolder);
-            }
+    @Override
+    public void onBindViewHolder(SalleViewHolder holder, int position) {
 
-            //getItem(position) va récupérer l'item [position] de la List<Room> salles
-            Room room = getItem(position);
+        int couleur;
 
-            //il ne reste plus qu'à remplir notre vue
-            viewHolder.nom.setText(room.getName());
-            //viewHolder.info.setText(room.getInfo());
+        //getItem(position) va récupérer l'item [position] de la List<Room> salles
+        holder.mV.setTag(holder);
+        Room room = mDataset.get(position);
 
-           // if(room.isDispo()){
-            if (true) {
-                couleur= Color.GREEN;
-            }else{
-                couleur=Color.RED;
-            }
+        //il ne reste plus qu'à remplir notre vue
+        holder.nom.setText(room.getName());
+        holder.size.setText(String.valueOf(room.getSize()));
 
-            viewHolder.dispo.setImageDrawable(new ColorDrawable(couleur));
-
-            return convertView;
-
+        // if(room.isDispo()){
+        if (true) {
+            couleur= Color.GREEN;
+        }else{
+            couleur=Color.RED;
         }
 
-        private class SalleViewHolder{
-            public TextView nom;
-            public TextView info;
-            public ImageView dispo;
+        holder.dispo.setImageDrawable(new ColorDrawable(couleur));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
+
+    public class SalleViewHolder extends RecyclerView.ViewHolder  {
+        public TextView nom;
+        public TextView size;
+        public ImageView dispo;
+        public View mV;
+
+        public SalleViewHolder(View v) {
+            super(v);
+            nom = (TextView) v.findViewById(R.id.name);
+            size = (TextView) v.findViewById(R.id.size);
+            dispo = (ImageView) v.findViewById(R.id.dispo);
+            mV = v;
         }
     }
+}
 

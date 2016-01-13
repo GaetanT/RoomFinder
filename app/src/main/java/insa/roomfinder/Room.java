@@ -18,7 +18,7 @@ public class Room {
     private Site site;
 
     @Element(name = "size")
-    private int size;
+    private Integer size;
 
     public Room() {
     }
@@ -42,11 +42,11 @@ public class Room {
         this.name = name;
     }
 
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(Integer size) {
         this.size = size;
     }
 }

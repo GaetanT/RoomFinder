@@ -1,38 +1,32 @@
 package insa.roomfinder;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import org.simpleframework.xml.Root;
+import java.util.ArrayList;
 
 public class ResultActivity extends Activity {
-
-
-    ListView mListView;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_salle);
-        mListView = (ListView) findViewById(R.id.listView);
-        List<Room> rooms = genererSalles();
+        ArrayList<Room> rooms = Data.getInstance().getRooms().getmRooms();
 
-        RoomAdapter adapter = new RoomAdapter(ResultActivity.this, rooms);
-        mListView.setAdapter(adapter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.Recycler_View);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new RoomAdapter(rooms);
+        mRecyclerView.setAdapter(mAdapter);
+
     }
 
 
-    private List<Room> genererSalles(){
-        List<Room> rooms = new ArrayList<>();
-        rooms.add(new Room("Salle1"));
-        rooms.add(new Room("Salle2"));
-        rooms.add(new Room("Salle3"));
-        rooms.add(new Room("Salle4"));
-        rooms.add(new Room("Salle5"));
-        return rooms;
-    }
 
 }
