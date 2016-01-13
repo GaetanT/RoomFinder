@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="sopraLogoDescription">Sopra logo</string>
     
     <string name="searchByRoom">Search By Room</string>
     <string name="searchWithFilters">Search with filters</string>

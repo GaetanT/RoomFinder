@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * Created by pierre on 10/01/16.
@@ -65,8 +63,10 @@ public class LogOut extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
+                String mail = sharedPreferences.getString("mail","");
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
+                editor.putString("mail",mail);
                 editor.apply();
 
                 getActivity().finish();

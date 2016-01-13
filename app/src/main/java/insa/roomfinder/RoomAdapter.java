@@ -16,7 +16,6 @@ import java.util.List;
  * Created by Gaetan on 09/01/2016.
  */
     public class RoomAdapter extends ArrayAdapter<Room> {
-
         //rooms est la liste des models à afficher
         public RoomAdapter(Context context, List<Room> rooms) {
             super(context, 0, rooms);
@@ -46,15 +45,18 @@ import java.util.List;
             //il ne reste plus qu'à remplir notre vue
             viewHolder.nom.setText(room.getName());
             //viewHolder.info.setText(room.getInfo());
-            /*if(room.isDispo()){
+
+           // if(room.isDispo()){
+            if (true) {
                 couleur= Color.GREEN;
             }else{
                 couleur=Color.RED;
             }
-            */
-            //viewHolder.dispo.setImageDrawable(new ColorDrawable(couleur));
+
+            viewHolder.dispo.setImageDrawable(new ColorDrawable(couleur));
 
             return convertView;
+
         }
 
         private class SalleViewHolder{

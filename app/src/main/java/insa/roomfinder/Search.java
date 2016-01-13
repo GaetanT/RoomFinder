@@ -2,18 +2,23 @@ package insa.roomfinder;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import insa.roomfinder.requests.Request;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,6 +43,8 @@ public class Search extends Fragment {
     private EditText mDateText;
     private Button mSearchButton;
     private NetworkInterface mNi;
+    private Spinner mSiteSpinner;
+    private ArrayList<String> mSitesName;
 
     public static Search newInstance(int sectionNumber) {
         Search fragment = new Search();
@@ -53,8 +60,7 @@ public class Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.search, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.search, container, false);
     }
 
     @Override
@@ -65,6 +71,10 @@ public class Search extends Fragment {
 
         mSearchButton = (Button) getView().findViewById(R.id.button);
         mDateText = (EditText) getView().findViewById(R.id.date);
+        mSiteSpinner = (Spinner) getView().findViewById(R.id.spinner);
+        mSitesName = Data.getInstance().getSitesName();
+
+
         Calendar mcurrentDate = Calendar.getInstance();
         int year = mcurrentDate.get(Calendar.YEAR);
         int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
@@ -75,8 +85,7 @@ public class Search extends Fragment {
         if (day < 10)
             sDay="0"+sDay;
 
-
-        mDateText.setText(sDay+" "+sMonth+" "+sYear);
+        mDateText.setText(sDay + " " + sMonth + " " + sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,15 +115,14 @@ public class Search extends Fragment {
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String xml = "<request></request>";
-                mNi.sendXMLRequest(xml).enqueue(new Callback<Void>() {
+                mNi.sendXMLRequest(new Request()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Response<Void> response, Retrofit retrofit) {
                         // Il faudra changer la liste des salles a afficher
                         // Faire de Liste Salles un fragment, pour tester tu peux afficher la liste de salle apres le login
-                       // Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                       // startActivity(intent);
-                        System.out.println("SUCCESS");
+                        // Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                        // startActivity(intent);
+                        System.out.println("SUCCESS -> " + response.code());
                     }
 
                     @Override
@@ -124,6 +132,17 @@ public class Search extends Fragment {
                 });
             }
         });
+
+        SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
+        String site = sharedPreferences.getString("site","");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSiteSpinner.setAdapter(adapter);
+        if (!mSiteSpinner.equals(null)) {
+            int spinnerPosition = adapter.getPosition(site);
+            mSiteSpinner.setSelection(spinnerPosition);
+        }
+
 
     }
 

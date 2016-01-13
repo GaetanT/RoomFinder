@@ -1,14 +1,24 @@
 package insa.roomfinder;
 
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
 
 /**
  * Created by pierre on 10/01/16.
  */
-@Root(name="rfSite")
+
+@Element(name="site")
 public class Site {
 
-    @Element(name="rfName")
+    /* Attributes */
+    @Element(name="name")
     private String name;
+
+    /* Constructor */
+    public Site(){}
+    public Site (String name) {
+        this.name = name;
+    }
+    /* Methods */
+    public String getName(){return name;}
+    public void setName(String name){this.name=name;}
 }

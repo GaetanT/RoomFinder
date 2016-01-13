@@ -7,27 +7,30 @@ import java.util.ArrayList;
  */
 public class Data {
 
+    /* Attributes */
     private static Rooms mRooms = new Rooms();
-
+    private static Sites mSites = new Sites();
     private static Data ourInstance = new Data();
 
+    /* Constructors */
     public static Data getInstance() {
         return ourInstance;
     }
-
     private Data() {
     }
 
-    public Rooms getmRooms() {
-        return mRooms;
-    }
-
-    public void setmRooms(Rooms rooms) {
+    /* Methods */
+    public Rooms getRooms() {return mRooms;}
+    public ArrayList<String> getRoomsName() {return mRooms.getRoomsName();}
+    public void setRooms(Rooms rooms) {
         if (rooms != null)
-            this.mRooms = rooms;
+            mRooms = rooms;
     }
 
-    public ArrayList<String> getRoomsName() {
-        return mRooms.getRoomsName();
+    public Sites getSites() {return mSites;}
+    public ArrayList<String> getSitesName() {return mSites.getSitesName();}
+    public void setSites(Sites sites) {
+        if (sites != null)
+            mSites = sites;
     }
 }

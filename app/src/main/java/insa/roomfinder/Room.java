@@ -8,16 +8,16 @@ import org.simpleframework.xml.Root;
  */
 @Root(name="room")
 public class Room {
-    @Element(name="rfId")
+    @Element(name="id")
     private double id;
 
-    @Element(name="rfName")
+    @Element(name="name")
     private String name;
 
-    @Element(name="rfSite")
+    @Element(name="site")
     private Site site;
 
-    @Element(name = "rfSize")
+    @Element(name = "size")
     private int size;
 
     public Room() {
