@@ -84,14 +84,16 @@ public class Profile extends Fragment {
         mPhoneNumberEditText.setKeyListener(null);
 
         SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
-        String fullName = sharedPreferences.getString("fullName", "");
+        String fullName = sharedPreferences.getString("name", "");
         String mail = sharedPreferences.getString("mail","");
-        String phoneNumber = sharedPreferences.getString("phoneNumber","");
+        String phoneNumber = sharedPreferences.getString("phone","");
         String site = sharedPreferences.getString("site","");
         String favoriteRoom = sharedPreferences.getString("favoriteRoom","");
         mFullNameEditText.setText(fullName);
         mMailEditText.setText(mail);
         mPhoneNumberEditText.setText(phoneNumber);
+
+        System.out.println("NAME : " + fullName);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -108,8 +110,6 @@ public class Profile extends Fragment {
             int spinnerPositionBis = adapterBis.getPosition(favoriteRoom);
             mFavoriteRoomSpinner.setSelection(spinnerPositionBis);
         }
-
-
 
 
         mProfileButton.setOnClickListener(new View.OnClickListener() {

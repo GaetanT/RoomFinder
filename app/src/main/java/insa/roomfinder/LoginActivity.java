@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import insa.roomfinder.Responses.ConnectionResponse;
+import insa.roomfinder.Responses.ProfileResponse;
 import insa.roomfinder.requests.ConnectionRequest;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -105,7 +106,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-        mSharedPreferences = getApplicationContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String storedMail = mSharedPreferences.getString("mail", "");
         mEmailView.setText(storedMail);
         String  storedPassword = mSharedPreferences.getString("password","");
@@ -236,6 +236,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         editor.apply();
     }
 
+    private void storeProfile (String id, String name, String mail, String site, String room, String phone) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("mail", mail);
+        editor.putString("name", name);
+        editor.putString("site", site);
+        editor.putString("favoriteRoom", room);
+        editor.putString("phone", phone);
+        editor.apply();
+    }
+
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -288,27 +298,44 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected Integer doInBackground(Void... params) {
             Integer errorCode = 0;
+            Integer employeeId = 0;
 
             try {
                 Response<ConnectionResponse> connectionResponse = mNi.attemptConnection(new ConnectionRequest(email, password)).execute();
-                if (connectionResponse.isSuccess() && connectionResponse.body().getmConnected())
+                if (connectionResponse.isSuccess() && connectionResponse.body().getmConnected()) {
                     storeID(email, password);
+                    employeeId = connectionResponse.body().getmUserId();
+                }
                 else if (connectionResponse.isSuccess() && !connectionResponse.body().getmConnected()) {
                     errorCode = 1; //wrong password
                 }
 
-                Response<Rooms> roomsResponse = mNi.getRooms().execute();
-                if (roomsResponse.isSuccess())
-                    Data.getInstance().setRooms(roomsResponse.body());
-                else
-                    errorCode = 2; //data not retrieved
+                if (errorCode==0) {
+                    Response<Rooms> roomsResponse = mNi.getRooms().execute();
+                    if (roomsResponse.isSuccess())
+                        Data.getInstance().setRooms(roomsResponse.body());
+                    else
+                        errorCode = 2; //data not retrieved
+                }
 
-                Response<Sites> sitesResponse = mNi.getSites().execute();
-                if (sitesResponse.isSuccess())
-                    Data.getInstance().setSites(sitesResponse.body());
-                else
-                    errorCode = 2; //data not retrieved
+                if (errorCode==0) {
+                    Response<Sites> sitesResponse = mNi.getSites().execute();
+                    if (sitesResponse.isSuccess())
+                        Data.getInstance().setSites(sitesResponse.body());
+                    else
+                        errorCode = 2; //data not retrieved
+                }
 
+                if (errorCode==0) {
+                    Response<ProfileResponse> profileResponseResponse = mNi.getProfile(String.valueOf(employeeId)).execute();
+                    if (profileResponseResponse.isSuccess()) {
+                        ProfileResponse pr = profileResponseResponse.body();
+                        System.out.println("ici : " + pr.getId().toString() + " " + pr.getName() + " " + pr.getMail() + " " + pr.getFavSite().getName() + " " + pr.getFavRoom().getName());
+                        storeProfile(pr.getId().toString(), pr.getName(), pr.getMail(), pr.getFavSite().getName(),pr.getFavRoom().getName(),pr.getPhone());
+                    } else {
+                        errorCode = 3;
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 errorCode = 3;
@@ -336,6 +363,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     Toast toast = Toast.makeText(getApplicationContext(), "Error : Data couldn't be retrieved", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER | Gravity.BOTTOM, 0, 0);
                     toast.show();
+                    break;
+                case 3 :
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Error : Profile user couldn't be retrieved", Toast.LENGTH_SHORT);
+                    toast1.setGravity(Gravity.CENTER | Gravity.BOTTOM, 0, 0);
+                    toast1.show();
                     break;
                 default:
                     Toast toast2 = Toast.makeText(getApplicationContext(), "Error : Login request failed", Toast.LENGTH_SHORT);

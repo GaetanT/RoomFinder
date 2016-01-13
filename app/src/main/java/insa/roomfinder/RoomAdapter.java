@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
 
         //getItem(position) va récupérer l'item [position] de la List<Room> salles
         holder.mV.setTag(holder);
+        holder.mV.setClickable(true);
+        holder.mV.setFocusable(true);
         Room room = mDataset.get(position);
 
         //il ne reste plus qu'à remplir notre vue
@@ -59,7 +62,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         return mDataset.size();
     }
 
-    public class SalleViewHolder extends RecyclerView.ViewHolder  {
+    public class SalleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView nom;
         public TextView size;
         public ImageView dispo;
@@ -71,6 +74,11 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
             size = (TextView) v.findViewById(R.id.size);
             dispo = (ImageView) v.findViewById(R.id.dispo);
             mV = v;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), "Vue :" + String.valueOf(v.getId()), Toast.LENGTH_SHORT).show();
         }
     }
 }

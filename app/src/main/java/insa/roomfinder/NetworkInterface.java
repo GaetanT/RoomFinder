@@ -1,6 +1,7 @@
 package insa.roomfinder;
 
 import insa.roomfinder.Responses.ConnectionResponse;
+import insa.roomfinder.Responses.ProfileResponse;
 import insa.roomfinder.requests.ConnectionRequest;
 import insa.roomfinder.requests.Request;
 import retrofit.Call;
@@ -8,6 +9,8 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
+import retrofit.http.Path;
+
 /**
  * Created by pierre on 09/01/16.
  */
@@ -29,5 +32,9 @@ public interface NetworkInterface {
     @Headers("Content-Type: application/xml; charset=utf-8")
     @POST("connect")
     Call<ConnectionResponse> attemptConnection(@Body ConnectionRequest xml);
+
+    @Headers("Content-Type: application/xml; charset=utf-8")
+    @GET("employee/{id}")
+    Call<ProfileResponse> getProfile(@Path("id") String id);
 
 }

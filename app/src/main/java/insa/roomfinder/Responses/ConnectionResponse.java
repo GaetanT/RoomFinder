@@ -27,4 +27,5 @@ public class ConnectionResponse {
     public Boolean getmConnected() {
         return mConnected;
     }
+    public Integer getmUserId() {return mUserId;}
 }
