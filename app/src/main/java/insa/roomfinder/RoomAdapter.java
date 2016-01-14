@@ -1,7 +1,6 @@
 package insa.roomfinder;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         ExtendedRoom extendedRoom = mDataset.get(position);
 
         //il ne reste plus qu'à remplir notre vue
-        holder.nom.setText(extendedRoom.getRoom().getName());
+        holder.name.setText(extendedRoom.getRoom().getName());
         holder.size.setText(String.valueOf(extendedRoom.getRoom().getSize()));
 
         // if(room.isDispo()){
@@ -55,8 +54,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         }else{
             couleur=Color.RED;
         }
-
-        holder.dispo.setImageDrawable(new ColorDrawable(couleur));
     }
 
     @Override

@@ -14,13 +14,13 @@ public class ResultActivity extends Activity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<ExtendedRoom> extendedRooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_salle);
-        ArrayList<ExtendedRoom> extendedRooms = Data.getInstance().getExtendedRooms().getExtendedRooms();
-
+        this.extendedRooms = Data.getInstance().getExtendedRooms().getExtendedRooms();
         mRecyclerView = (RecyclerView) findViewById(R.id.Recycler_View);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -28,7 +28,4 @@ public class ResultActivity extends Activity {
         mAdapter = new RoomAdapter(extendedRooms);
         mRecyclerView.setAdapter(mAdapter);
     }
-
-
-
 }

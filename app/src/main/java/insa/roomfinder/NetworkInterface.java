@@ -15,9 +15,7 @@ import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
-/**
- * Created by pierre on 09/01/16.
- */
+
 public interface NetworkInterface {
     String ENDPOINT = "http://192.168.0.101:8080/Sopra_Server/webresources/";
 

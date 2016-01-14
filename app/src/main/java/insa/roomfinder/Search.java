@@ -177,7 +177,10 @@ public class Search extends Fragment {
                 String date = DateUtil.dateToYMD(mDateText.getText().toString(), getView().getContext());
                 Integer startSlot = mHourSpinner.getSelectedItemPosition() + 1;
                 Integer endSlot = startSlot + mLengthSpinner.getSelectedItemPosition() + 1;
-                Integer size = Integer.parseInt(mSize.getText().toString());
+                String sizeString = mSize.getText().toString();
+                        if (sizeString.isEmpty() || sizeString == null)
+                            sizeString = "5";
+                Integer size = Integer.parseInt(sizeString);
 
                 Equipments equipments = new Equipments();
                 int i;

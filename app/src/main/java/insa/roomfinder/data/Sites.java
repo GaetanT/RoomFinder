@@ -5,9 +5,6 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-/**
- * Created by pierre on 12/01/16.
- */
 @Root(name="sites")
 public class Sites {
     /* Attributes */
@@ -25,5 +22,6 @@ public class Sites {
         }
         return sitesName;
     }
-
 }
+
+

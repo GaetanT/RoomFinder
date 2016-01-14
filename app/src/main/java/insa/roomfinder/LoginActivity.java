@@ -298,6 +298,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         public ConnectOperation(String mail, String pwd) {
             email = mail;
             password = pwd;
+
             mNi = new Retrofit.Builder().baseUrl(NetworkInterface.ENDPOINT).addConverterFactory(SimpleXmlConverterFactory.create()).build().create(NetworkInterface.class);
         }
 
@@ -340,7 +341,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         Data.getInstance().setSites(sitesResponse.body());
                     else {
                         errorCode = 2; //data not retrieved
-                        System.out.println("222222222222222222222");
+
                     }
                 }
 
@@ -350,8 +351,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         Data.getInstance().setEquipmentsList(equipmentsResponse.body());
                     else {
                         errorCode = 2; //data not retrieved
-
-                        System.out.println("333333333333333333333");
+                        System.out.println("333333 : " + equipmentsResponse.code());
                     }
                 }
 
