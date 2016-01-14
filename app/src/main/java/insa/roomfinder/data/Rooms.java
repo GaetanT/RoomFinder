@@ -1,4 +1,4 @@
-package insa.roomfinder;
+package insa.roomfinder.data;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;

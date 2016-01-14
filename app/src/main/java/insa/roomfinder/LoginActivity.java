@@ -35,11 +35,16 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import insa.roomfinder.Responses.ConnectionResponse;
-import insa.roomfinder.Responses.ProfileResponse;
+import insa.roomfinder.data.Data;
+import insa.roomfinder.data.Equipments;
+import insa.roomfinder.data.ExtendedRooms;
+import insa.roomfinder.data.Sites;
 import insa.roomfinder.requests.ConnectionRequest;
+import insa.roomfinder.responses.ConnectionResponse;
+import insa.roomfinder.responses.ProfileResponse;
 import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.SimpleXmlConverterFactory;
@@ -238,6 +243,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private void storeProfile (String id, String name, String mail, String site, String room, String phone) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("id", id);
         editor.putString("mail", mail);
         editor.putString("name", name);
         editor.putString("site", site);
@@ -310,20 +316,43 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     errorCode = 1; //wrong password
                 }
 
+
                 if (errorCode==0) {
-                    Response<Rooms> roomsResponse = mNi.getRooms().execute();
-                    if (roomsResponse.isSuccess())
-                        Data.getInstance().setRooms(roomsResponse.body());
-                    else
+                    Response<ExtendedRooms> roomsResponse = mNi.getExtendedRooms().execute(); //Important que les rooms soient triées par leurs ID;
+                    if (roomsResponse.isSuccess()) {
+                        HashMap<Integer,Integer> idToIndexExtendedRooms = new HashMap<>();
+                        Data.getInstance().setExtendedRooms(roomsResponse.body());
+                        int i;
+                        for(i=0;i<roomsResponse.body().getExtendedRooms().size();i++) {
+                            idToIndexExtendedRooms.put(roomsResponse.body().getExtendedRooms().get(i).getRoom().getId(),i);
+                        }
+
+                    }
+                    else {
                         errorCode = 2; //data not retrieved
+                        System.out.println("11111111111111111111 : " + roomsResponse.code());
+                    }
                 }
 
                 if (errorCode==0) {
                     Response<Sites> sitesResponse = mNi.getSites().execute();
                     if (sitesResponse.isSuccess())
                         Data.getInstance().setSites(sitesResponse.body());
-                    else
+                    else {
                         errorCode = 2; //data not retrieved
+                        System.out.println("222222222222222222222");
+                    }
+                }
+
+                if (errorCode==0) {
+                    Response<Equipments> equipmentsResponse = mNi.getEquipmentsList().execute();
+                    if (equipmentsResponse.isSuccess())
+                        Data.getInstance().setEquipmentsList(equipmentsResponse.body());
+                    else {
+                        errorCode = 2; //data not retrieved
+
+                        System.out.println("333333333333333333333");
+                    }
                 }
 
                 if (errorCode==0) {

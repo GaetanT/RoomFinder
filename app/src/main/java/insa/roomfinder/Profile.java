@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import insa.roomfinder.data.Data;
+
 /**
  * Created by pierre on 02/01/16.
  */
@@ -75,7 +77,7 @@ public class Profile extends Fragment {
         mSiteSpinner = (Spinner) getView().findViewById(R.id.siteSpinner);
         mFavoriteRoomSpinner = (Spinner) getView().findViewById(R.id.favoriteRoomSpinner);
         mProfileButton = (Button) getView().findViewById(R.id.profileButton);
-        mRoomsName = Data.getInstance().getRoomsName();
+        mRoomsName = Data.getInstance().getExtendedRoomsName();
         mSitesName = Data.getInstance().getSitesName();
 
         //in order to avoid the user to change his information that only the server is allow to modify

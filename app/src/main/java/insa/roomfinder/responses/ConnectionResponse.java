@@ -1,4 +1,4 @@
-package insa.roomfinder.Responses;
+package insa.roomfinder.responses;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;

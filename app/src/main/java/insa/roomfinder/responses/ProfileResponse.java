@@ -1,10 +1,10 @@
-package insa.roomfinder.Responses;
+package insa.roomfinder.responses;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-import insa.roomfinder.Room;
-import insa.roomfinder.Site;
+import insa.roomfinder.data.Room;
+import insa.roomfinder.data.Site;
 
 /**
  * Created by pierre on 13/01/16.

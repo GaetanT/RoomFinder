@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import insa.roomfinder.data.Data;
+import insa.roomfinder.data.ExtendedRoom;
+
 public class ResultActivity extends Activity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -16,15 +19,14 @@ public class ResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_salle);
-        ArrayList<Room> rooms = Data.getInstance().getRooms().getmRooms();
+        ArrayList<ExtendedRoom> extendedRooms = Data.getInstance().getExtendedRooms().getExtendedRooms();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.Recycler_View);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RoomAdapter(rooms);
+        mAdapter = new RoomAdapter(extendedRooms);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
 

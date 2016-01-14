@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberSigned"
                     android:ems="2"
-                    android:id="@+id/editText4"
+                    android:id="@+id/searchSize"
                     android:layout_marginStart="5dp"
                     android:textSize="16sp"
                     android:textAlignment="textEnd"
@@ -193,7 +193,6 @@
                 android:layout_marginBottom="5dp"
 
                 />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -205,52 +204,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:layout_weight="1">
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/visio"
-                        android:text="@string/visio"
-                        />
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/phone"
-                        android:text="@string/phone"
-                        />
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/secured"
-                        android:text="@string/secured"
-                        />
+                    android:layout_weight="1"
+                    android:id="@+id/equipmentView1">
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:id="@+id/equipmentView2"
                     >
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/digilab"
-                        android:text="@string/digilab"
-                        />
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/blackboard"
-                        android:text="@string/blackboard"
-                        />
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv"
-                        android:text="@string/tv"
-                        />
                 </LinearLayout>
             </LinearLayout>
             <!--                android:choiceMode="multipleChoice"

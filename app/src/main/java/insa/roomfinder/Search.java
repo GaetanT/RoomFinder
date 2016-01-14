@@ -13,13 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import insa.roomfinder.data.Data;
+import insa.roomfinder.data.Equipment;
+import insa.roomfinder.data.Equipments;
+import insa.roomfinder.requests.SearchRequest;
 import retrofit.Retrofit;
 import retrofit.SimpleXmlConverterFactory;
 
@@ -43,8 +49,15 @@ public class Search extends Fragment {
     private Button mSearchButton;
     private NetworkInterface mNi;
     private Spinner mSiteSpinner;
+    private Spinner mHourSpinner;
+    private Spinner mLengthSpinner;
     private ArrayList<String> mSitesName;
     private ArrayList<String> mRoomsName;
+    private ArrayList<String> mEquipmentsName;
+    private LinearLayout mLayoutEquipment1;
+    private LinearLayout mLayoutEquipment2;
+    private EditText mSize;
+    private ArrayList<CheckBox> mCheckboxes;
 
     public static Search newInstance(int sectionNumber) {
         Search fragment = new Search();
@@ -72,8 +85,32 @@ public class Search extends Fragment {
         mSearchButton = (Button) getView().findViewById(R.id.button);
         mDateText = (EditText) getView().findViewById(R.id.date);
         mSiteSpinner = (Spinner) getView().findViewById(R.id.spinner);
+        mHourSpinner = (Spinner) getView().findViewById(R.id.hourSpinner);
+        mLengthSpinner = (Spinner) getView().findViewById(R.id.lengthSpinner);
+        mSize = (EditText) getView().findViewById(R.id.searchSize);
         mSitesName = Data.getInstance().getSitesName();
-        mRoomsName = Data.getInstance().getRoomsName();
+        mRoomsName = Data.getInstance().getExtendedRoomsName();
+        mEquipmentsName = Data.getInstance().getEquipmentsName();
+        mLayoutEquipment1 = (LinearLayout) getView().findViewById(R.id.equipmentView1);
+        mLayoutEquipment2 = (LinearLayout) getView().findViewById(R.id.equipmentView2);
+        mCheckboxes = new ArrayList<>();
+
+
+        //Ajout des choix d'équipements
+        int i;
+        for (i=0; i<mEquipmentsName.size(); i++) {
+            CheckBox checkbox = new CheckBox(getView().getContext());
+            checkbox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            checkbox.setText(mEquipmentsName.get(i));
+            mCheckboxes.add(i,checkbox);
+            if (i % 2 == 0) {
+                mLayoutEquipment1.addView(checkbox);
+            } else {
+                mLayoutEquipment2.addView(checkbox);
+            }
+
+
+        }
 
 
         Calendar mcurrentDate = Calendar.getInstance();
@@ -81,7 +118,7 @@ public class Search extends Fragment {
         int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
         int day = mcurrentDate.get(Calendar.DAY_OF_MONTH);
         String sYear = String.valueOf(year);
-        String sMonth = MonthsUtil.monthToString(month, getActivity().getApplicationContext());
+        String sMonth = DateUtil.monthToString(month, getActivity().getApplicationContext());
         String sDay = String.valueOf(day);
         if (day < 10)
             sDay="0"+sDay;
@@ -90,7 +127,7 @@ public class Search extends Fragment {
         AutoCompleteTextView textView = (AutoCompleteTextView) getView().findViewById(R.id.searchView);
         textView.setAdapter(adapter);
 
-       // Utiliser Data.getInstance().getRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
+       // Utiliser Data.getInstance().getExtendedRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
 
         mDateText.setText(sDay + " " + sMonth + " " + sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +144,7 @@ public class Search extends Fragment {
                     public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                         // TODO Auto-generated method stub
                         String year = String.valueOf(selectedYear);
-                        String month = MonthsUtil.monthToString(selectedMonth + 1, getActivity().getApplicationContext());
+                        String month = DateUtil.monthToString(selectedMonth + 1, getActivity().getApplicationContext());
                         String day = String.valueOf(selectedDay);
                         if (selectedDay < 10)
                             day = "0" + day;
@@ -119,13 +156,6 @@ public class Search extends Fragment {
             }
         });
 
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                startActivity(intent);
-            }
-        });
 
         SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String site = sharedPreferences.getString("site","");
@@ -137,6 +167,31 @@ public class Search extends Fragment {
             mSiteSpinner.setSelection(spinnerPosition);
         }
 
+
+        //Lance la recherche
+        mSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String site = mSiteSpinner.getSelectedItem().toString();
+                String date = DateUtil.dateToYMD(mDateText.getText().toString(), getView().getContext());
+                Integer startSlot = mHourSpinner.getSelectedItemPosition() + 1;
+                Integer endSlot = startSlot + mLengthSpinner.getSelectedItemPosition() + 1;
+                Integer size = Integer.parseInt(mSize.getText().toString());
+
+                Equipments equipments = new Equipments();
+                int i;
+                for (i=0; i<mEquipmentsName.size(); i++) {
+                    if (mCheckboxes.get(i).isChecked())
+                       equipments.addEquipment(new Equipment(mCheckboxes.get(i).getText().toString()));
+                }
+
+
+                SearchRequest searchRequest = new SearchRequest(null,equipments,startSlot,endSlot,size,site,date);
+                Intent intent = new Intent(getActivity(), ResultActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

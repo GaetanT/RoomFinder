@@ -12,15 +12,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import insa.roomfinder.data.ExtendedRoom;
+
 /**
  * Created by Gaetan on 09/01/2016.
  */
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolder> {
     //rooms est la liste des models à afficher
-    private ArrayList<Room> mDataset;
+    private ArrayList<ExtendedRoom> mDataset;
 
-    public RoomAdapter(ArrayList<Room> rooms) {
-            mDataset = rooms;
+    public RoomAdapter(ArrayList<ExtendedRoom> extendedRooms) {
+            mDataset = extendedRooms;
         }
 
     @Override
@@ -41,11 +43,11 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         holder.mV.setTag(holder);
         holder.mV.setClickable(true);
         holder.mV.setFocusable(true);
-        Room room = mDataset.get(position);
+        ExtendedRoom extendedRoom = mDataset.get(position);
 
         //il ne reste plus qu'à remplir notre vue
-        holder.nom.setText(room.getName());
-        holder.size.setText(String.valueOf(room.getSize()));
+        holder.nom.setText(extendedRoom.getRoom().getName());
+        holder.size.setText(String.valueOf(extendedRoom.getRoom().getSize()));
 
         // if(room.isDispo()){
         if (true) {
