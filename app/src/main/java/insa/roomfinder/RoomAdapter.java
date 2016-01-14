@@ -65,16 +65,22 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
     }
 
     public class SalleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView nom;
+        public TextView name;
+        public TextView site;
         public TextView size;
-        public ImageView dispo;
+        public ImageView porte;
+        public ImageView position;
+        public ImageView groupe;
         public View mV;
 
         public SalleViewHolder(View v) {
             super(v);
-            nom = (TextView) v.findViewById(R.id.name);
+            name = (TextView) v.findViewById(R.id.name);
             size = (TextView) v.findViewById(R.id.size);
-            dispo = (ImageView) v.findViewById(R.id.dispo);
+            site = (TextView) v.findViewById(R.id.site);
+            porte = (ImageView) v.findViewById(R.id.image_porte);
+            position = (ImageView) v.findViewById(R.id.image_position);
+            groupe = (ImageView) v.findViewById(R.id.image_groupe);
             mV = v;
         }
 
