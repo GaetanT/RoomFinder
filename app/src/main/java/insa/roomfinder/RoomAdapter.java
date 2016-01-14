@@ -35,8 +35,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
     @Override
     public void onBindViewHolder(SalleViewHolder holder, int position) {
 
-        int couleur;
-
         //getItem(position) va récupérer l'item [position] de la List<Room> salles
         holder.mV.setTag(holder);
         holder.mV.setClickable(true);
@@ -44,17 +42,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         Room room = mDataset.get(position);
 
         //il ne reste plus qu'à remplir notre vue
-        holder.nom.setText(room.getName());
+        holder.name.setText(room.getName());
+        //holder.site.setText(String.valueOf(room.getSite()));
         holder.size.setText(String.valueOf(room.getSize()));
 
-        // if(room.isDispo()){
-        if (true) {
-            couleur= Color.GREEN;
-        }else{
-            couleur=Color.RED;
-        }
-
-        holder.dispo.setImageDrawable(new ColorDrawable(couleur));
     }
 
     @Override
@@ -63,16 +54,22 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
     }
 
     public class SalleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView nom;
+        public TextView name;
+        public TextView site;
         public TextView size;
-        public ImageView dispo;
+        public ImageView porte;
+        public ImageView position;
+        public ImageView groupe;
         public View mV;
 
         public SalleViewHolder(View v) {
             super(v);
-            nom = (TextView) v.findViewById(R.id.name);
+            name = (TextView) v.findViewById(R.id.name);
             size = (TextView) v.findViewById(R.id.size);
-            dispo = (ImageView) v.findViewById(R.id.dispo);
+            site = (TextView) v.findViewById(R.id.site);
+            porte = (ImageView) v.findViewById(R.id.image_porte);
+            position = (ImageView) v.findViewById(R.id.image_position);
+            groupe = (ImageView) v.findViewById(R.id.image_groupe);
             mV = v;
         }
 
