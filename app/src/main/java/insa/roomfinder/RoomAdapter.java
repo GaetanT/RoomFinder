@@ -47,6 +47,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         //il ne reste plus qu'à remplir notre vue
         holder.name.setText(extendedRoom.getRoom().getName());
         holder.size.setText(String.valueOf(extendedRoom.getRoom().getSize()));
+        holder.site.setText(String.valueOf(extendedRoom.getRoom().getSite().getName()));
 
         // if(room.isDispo()){
         if (true) {

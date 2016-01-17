@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Rooms {
 
     /* attributes */
-    @ElementList(inline = true)
+    @ElementList(name="room", inline = true, required = false)
     private ArrayList<Room> mRooms;
 
     /* Constructors */

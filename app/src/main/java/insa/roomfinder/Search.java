@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +27,11 @@ import java.util.Calendar;
 import insa.roomfinder.data.Data;
 import insa.roomfinder.data.Equipment;
 import insa.roomfinder.data.Equipments;
+import insa.roomfinder.data.ExtendedRooms;
+import insa.roomfinder.data.Rooms;
 import insa.roomfinder.requests.SearchRequest;
+import retrofit.Callback;
+import retrofit.Response;
 import retrofit.Retrofit;
 import retrofit.SimpleXmlConverterFactory;
 
@@ -189,10 +195,37 @@ public class Search extends Fragment {
                        equipments.addEquipment(new Equipment(mCheckboxes.get(i).getText().toString()));
                 }
 
-
                 SearchRequest searchRequest = new SearchRequest(null,equipments,startSlot,endSlot,size,site,date);
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                startActivity(intent);
+                mNi.searchRooms(searchRequest).enqueue(new Callback<Rooms>() {
+                    @Override
+                    public void onResponse(Response<Rooms> response, Retrofit retrofit) {
+                        if (response.isSuccess()) {
+                            ExtendedRooms extendedRooms = ExtendedRooms.roomsToExtendedRooms(response.body());
+
+                            if (extendedRooms != null && extendedRooms.getExtendedRooms().size() != 0) {
+                                Intent intent = new Intent(getActivity(), ResultActivity.class);
+                                intent.putExtra("extendedRooms", extendedRooms);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast toast = Toast.makeText(getView().getContext(), "No room found", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, -500);
+                                toast.show();
+                            }
+                        } else {
+                            System.out.println("Error : " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast toast = Toast.makeText(getView().getContext(), "A problem occurred", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, -500);
+                        toast.show();
+                        t.printStackTrace();
+
+                    }
+                });
             }
         });
 

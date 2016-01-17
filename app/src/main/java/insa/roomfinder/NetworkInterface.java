@@ -40,7 +40,7 @@ public interface NetworkInterface {
     Call<Equipments> getEquipmentsList();
 
     @Headers("Content-Type: application/xml; charset=utf-8")
-    @POST("request")
+    @POST("search")
     Call<Rooms> searchRooms(@Body SearchRequest xml);
 
 

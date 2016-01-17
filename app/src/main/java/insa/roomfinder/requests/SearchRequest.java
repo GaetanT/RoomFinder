@@ -13,13 +13,16 @@ public class SearchRequest {
     @Element(name = "name", required = false)
     private String name;
 
-    @Element(name = "equipmentList", required = false)
+    @Element(name = "equipments",  required = false)
     private Equipments equipments;
+
+    @Element(name = "day", required = false)
+    private String day;
 
     @Element(name = "startSlot", required = false)
     private Integer startSlot;
 
-    @Element(name = "endSlot", required = false)
+    @Element(name = "endslot", required = false)
     private Integer endSlot;
 
     @Element(name = "size", required = false)
@@ -27,9 +30,6 @@ public class SearchRequest {
 
     @Element(name = "site", required = false)
     private String site;
-
-    @Element(name = "day", required = false)
-    private String day;
 
     public SearchRequest(String name,Equipments equipments, Integer startSlot, Integer endSlot, Integer size, String site, String day) {
         if (name != null && !name.isEmpty())
@@ -43,8 +43,9 @@ public class SearchRequest {
         if (site != null)
             this.size=size;
         if (site != null)
-            this.name=site;
+            this.site=site;
         if (day != null)
             this.day=day;
+
     }
 }

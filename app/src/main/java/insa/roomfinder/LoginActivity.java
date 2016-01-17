@@ -315,7 +315,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 }
                 else if (connectionResponse.isSuccess() && !connectionResponse.body().getmConnected()) {
                     errorCode = 1; //wrong password
+                } else {
+                    errorCode = 4;
                 }
+
 
 
                 if (errorCode==0) {
@@ -367,7 +370,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                errorCode = 3;
+                errorCode = 4;
             }
             return errorCode;
         }
@@ -399,7 +402,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     toast1.show();
                     break;
                 default:
-                    Toast toast2 = Toast.makeText(getApplicationContext(), "Error : Login request failed", Toast.LENGTH_SHORT);
+                    Toast toast2 = Toast.makeText(getApplicationContext(), "Error : A network problem occurred", Toast.LENGTH_SHORT);
                     toast2.setGravity(Gravity.CENTER | Gravity.BOTTOM, 0, 0);
                     toast2.show();
                     break;
