@@ -315,58 +315,52 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 }
                 else if (connectionResponse.isSuccess() && !connectionResponse.body().getmConnected()) {
                     errorCode = 1; //wrong password
-                } else {
+                } else
                     errorCode = 4;
-                }
-
-
 
                 if (errorCode==0) {
-                    Response<ExtendedRooms> roomsResponse = mNi.getExtendedRooms().execute(); //Important que les rooms soient triées par leurs ID;
+                    Response<ExtendedRooms> roomsResponse = mNi.getExtendedRooms().execute(); //Retrieve extended rooms
                     if (roomsResponse.isSuccess()) {
                         HashMap<Integer,Integer> idToIndexExtendedRooms = new HashMap<>();
-                        Data.getInstance().setExtendedRooms(roomsResponse.body());
                         int i;
+                        int roomId;
                         for(i=0;i<roomsResponse.body().getExtendedRooms().size();i++) {
-                            idToIndexExtendedRooms.put(roomsResponse.body().getExtendedRooms().get(i).getRoom().getId(),i);
+                            roomId = roomsResponse.body().getExtendedRooms().get(i).getRoom().getId();
+                            idToIndexExtendedRooms.put(roomId, i);
+                            System.out.println("roomId " + roomId +  " at index : " + idToIndexExtendedRooms.get(roomId));
                         }
+                        //roomsResponse.body().setIdToIndexExtendedRooms(idToIndexExtendedRooms);
+                        Data.getInstance().setExtendedRooms(roomsResponse.body());
+                        Data.getInstance().setIdToIndexExtendedRooms(idToIndexExtendedRooms);
 
                     }
-                    else {
+                    else
                         errorCode = 2; //data not retrieved
-                        System.out.println("11111111111111111111 : " + roomsResponse.code());
-                    }
                 }
 
                 if (errorCode==0) {
-                    Response<Sites> sitesResponse = mNi.getSites().execute();
+                    Response<Sites> sitesResponse = mNi.getSites().execute(); //Retrieve sites
                     if (sitesResponse.isSuccess())
                         Data.getInstance().setSites(sitesResponse.body());
-                    else {
+                    else
                         errorCode = 2; //data not retrieved
-
-                    }
                 }
 
                 if (errorCode==0) {
-                    Response<Equipments> equipmentsResponse = mNi.getEquipmentsList().execute();
+                    Response<Equipments> equipmentsResponse = mNi.getEquipmentsList().execute(); //Retrieve the equipment list
                     if (equipmentsResponse.isSuccess())
                         Data.getInstance().setEquipmentsList(equipmentsResponse.body());
-                    else {
+                    else
                         errorCode = 2; //data not retrieved
-                        System.out.println("333333 : " + equipmentsResponse.code());
-                    }
                 }
 
                 if (errorCode==0) {
-                    Response<ProfileResponse> profileResponseResponse = mNi.getProfile(String.valueOf(employeeId)).execute();
+                    Response<ProfileResponse> profileResponseResponse = mNi.getProfile(String.valueOf(employeeId)).execute(); //Retrieve user profile
                     if (profileResponseResponse.isSuccess()) {
                         ProfileResponse pr = profileResponseResponse.body();
-                        System.out.println("ici : " + pr.getId().toString() + " " + pr.getName() + " " + pr.getMail() + " " + pr.getFavSite().getName() + " " + pr.getFavRoom().getName());
                         storeProfile(pr.getId().toString(), pr.getName(), pr.getMail(), pr.getFavSite().getName(),pr.getFavRoom().getName(),pr.getPhone());
-                    } else {
+                    } else
                         errorCode = 3;
-                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

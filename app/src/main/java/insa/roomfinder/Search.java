@@ -8,9 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -19,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -51,8 +55,10 @@ public class Search extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
+    private EditText mRoomNameSearch;
     private EditText mDateText;
     private Button mSearchButton;
+    private Button mNameRoomButton;
     private NetworkInterface mNi;
     private Spinner mSiteSpinner;
     private Spinner mHourSpinner;
@@ -100,15 +106,18 @@ public class Search extends Fragment {
         mLayoutEquipment1 = (LinearLayout) getView().findViewById(R.id.equipmentView1);
         mLayoutEquipment2 = (LinearLayout) getView().findViewById(R.id.equipmentView2);
         mCheckboxes = new ArrayList<>();
+        mRoomNameSearch = (EditText) getView().findViewById(R.id.roomNameSearchView);
+        mNameRoomButton = (Button) getView().findViewById(R.id.roomNameSearchButton);
+
 
 
         //Ajout des choix d'équipements
         int i;
-        for (i=0; i<mEquipmentsName.size(); i++) {
+        for (i = 0; i < mEquipmentsName.size(); i++) {
             CheckBox checkbox = new CheckBox(getView().getContext());
             checkbox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             checkbox.setText(mEquipmentsName.get(i));
-            mCheckboxes.add(i,checkbox);
+            mCheckboxes.add(i, checkbox);
             if (i % 2 == 0) {
                 mLayoutEquipment1.addView(checkbox);
             } else {
@@ -127,13 +136,13 @@ public class Search extends Fragment {
         String sMonth = DateUtil.monthToString(month, getActivity().getApplicationContext());
         String sDay = String.valueOf(day);
         if (day < 10)
-            sDay="0"+sDay;
+            sDay = "0" + sDay;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.item_list_row, mRoomsName);
-        AutoCompleteTextView textView = (AutoCompleteTextView) getView().findViewById(R.id.searchView);
+        AutoCompleteTextView textView = (AutoCompleteTextView) mRoomNameSearch;
         textView.setAdapter(adapter);
 
-       // Utiliser Data.getInstance().getExtendedRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
+        // Utiliser Data.getInstance().getExtendedRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
 
         mDateText.setText(sDay + " " + sMonth + " " + sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +173,7 @@ public class Search extends Fragment {
 
 
         SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
-        String site = sharedPreferences.getString("site","");
+        String site = sharedPreferences.getString("site", "");
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSiteSpinner.setAdapter(adapter2);
@@ -174,58 +183,66 @@ public class Search extends Fragment {
         }
 
 
-        //Lance la recherche
+        //Lance la recherche par nom
+        mRoomNameSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == R.id.roomNameSearchView || actionId == EditorInfo.IME_NULL) {
+
+                    //In order to quickly hide the keyboard
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+
+                    String roomName = mRoomNameSearch.getText().toString();
+                    SearchRequest request = new SearchRequest(roomName,null,null,null,null,null,null);
+                    searchRooms(request);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    mNameRoomButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //In order to quickly hide the keyboard
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+
+            String roomName = mRoomNameSearch.getText().toString();
+            SearchRequest request = new SearchRequest(roomName,null,null,null,null,null,null);
+            searchRooms(request);
+        }
+    });
+
+
+
+        //Lance la recherche classique
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Récupération des spécifications sur la salle de réunion
                 String site = mSiteSpinner.getSelectedItem().toString();
                 String date = DateUtil.dateToYMD(mDateText.getText().toString(), getView().getContext());
                 Integer startSlot = mHourSpinner.getSelectedItemPosition() + 1;
                 Integer endSlot = startSlot + mLengthSpinner.getSelectedItemPosition() + 1;
                 String sizeString = mSize.getText().toString();
-                        if (sizeString.isEmpty() || sizeString == null)
-                            sizeString = "5";
+                if (sizeString.isEmpty())
+                    sizeString = "5"; //5 personnes par défaut
                 Integer size = Integer.parseInt(sizeString);
 
+                //Création la liste liste d'équipement voulue
                 Equipments equipments = new Equipments();
                 int i;
-                for (i=0; i<mEquipmentsName.size(); i++) {
+                for (i = 0; i < mEquipmentsName.size(); i++) {
                     if (mCheckboxes.get(i).isChecked())
-                       equipments.addEquipment(new Equipment(mCheckboxes.get(i).getText().toString()));
+                        equipments.addEquipment(new Equipment(mCheckboxes.get(i).getText().toString()));
                 }
 
-                SearchRequest searchRequest = new SearchRequest(null,equipments,startSlot,endSlot,size,site,date);
-                mNi.searchRooms(searchRequest).enqueue(new Callback<Rooms>() {
-                    @Override
-                    public void onResponse(Response<Rooms> response, Retrofit retrofit) {
-                        if (response.isSuccess()) {
-                            ExtendedRooms extendedRooms = ExtendedRooms.roomsToExtendedRooms(response.body());
-
-                            if (extendedRooms != null && extendedRooms.getExtendedRooms().size() != 0) {
-                                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                                intent.putExtra("extendedRooms", extendedRooms);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast toast = Toast.makeText(getView().getContext(), "No room found", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, -500);
-                                toast.show();
-                            }
-                        } else {
-                            System.out.println("Error : " + response.code());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Toast toast = Toast.makeText(getView().getContext(), "A problem occurred", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, -500);
-                        toast.show();
-                        t.printStackTrace();
-
-                    }
-                });
+                //Création de la requete puis envoie
+                SearchRequest searchRequest = new SearchRequest(null, equipments, startSlot, endSlot, size, site, date);
+                searchRooms(searchRequest);
             }
         });
 
@@ -235,5 +252,41 @@ public class Search extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+
+    public void searchRooms(SearchRequest searchRequest) {
+        mNi.searchRooms(searchRequest).
+                enqueue(new Callback<Rooms>() {
+                            @Override
+                            public void onResponse(Response<Rooms> response, Retrofit retrofit) {
+                                if (response.isSuccess()) {
+                                    ExtendedRooms extendedRooms = new ExtendedRooms();
+                                    extendedRooms = extendedRooms.roomsToExtendedRooms(response.body());
+
+                                    if (extendedRooms != null && extendedRooms.getExtendedRooms().size() != 0) {
+                                        Intent intent = new Intent(getActivity(), ResultActivity.class);
+                                        intent.putExtra("extendedRooms", extendedRooms);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast toast = Toast.makeText(getView().getContext(), "No room found", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, -500);
+                                        toast.show();
+                                    }
+                                } else {
+                                    System.out.println("Error : " + response.code());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Toast toast = Toast.makeText(getView().getContext(), "A problem occurred", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, -500);
+                                toast.show();
+                                t.printStackTrace();
+                            }
+                        }
+
+                );
     }
 }

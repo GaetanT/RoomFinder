@@ -47,4 +47,8 @@ public class Data {
     public void setIdToIndexExtendedRooms(HashMap<Integer,Integer> hm) {
         idToIndexExtendedRooms = hm;
     }
+
+    public HashMap<Integer, Integer> getIdToIndexExtendedRooms() {
+        return idToIndexExtendedRooms;
+    }
 }

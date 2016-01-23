@@ -43,19 +43,27 @@
                 <AutoCompleteTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/searchView"
+                    android:id="@+id/roomNameSearchView"
                     android:iconifiedByDefault="false"
-                    android:ems="13"
+                    android:ems="9"
                     android:layout_gravity="center"
                     android:hint="Room's name"
-                    android:imeActionLabel="Search"
                     android:imeOptions="actionUnspecified"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:layout_marginStart="5dp"
                     android:textSize="18sp"
                     android:inputType="textFilter"
+                    android:imeActionLabel="@string/search"
                     />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/search"
+                    android:layout_marginStart="4dp"
+                    android:id="@+id/roomNameSearchButton"/>
             </LinearLayout>
 
             <TextView

@@ -7,6 +7,7 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by pierre on 14/01/16.
@@ -14,9 +15,12 @@ import java.util.ArrayList;
 @Root(name ="extendedRooms")
 public class ExtendedRooms implements Parcelable {
 
+    /* Attributes */
     @ElementList(name = "extendedRoom", inline = true)
-    ArrayList<ExtendedRoom> extendedRooms;
+    private ArrayList<ExtendedRoom> extendedRooms;
 
+
+    /* Constructors */
     public ExtendedRooms(){extendedRooms = new ArrayList<>();}
     public ExtendedRooms(ArrayList<ExtendedRoom> e) {
         this.extendedRooms=e;
@@ -25,6 +29,8 @@ public class ExtendedRooms implements Parcelable {
         this.extendedRooms = new ArrayList<>();
         in.readTypedList(extendedRooms, ExtendedRoom.CREATOR);
     }
+
+    /* Methods */
 
     public ArrayList<ExtendedRoom> getExtendedRooms() {
         return extendedRooms;
@@ -43,11 +49,14 @@ public class ExtendedRooms implements Parcelable {
     }
 
 
-    public static ExtendedRooms roomsToExtendedRooms(Rooms rooms) {
+    public ExtendedRooms roomsToExtendedRooms(Rooms rooms) {
         ExtendedRooms extendedRooms = new ExtendedRooms();
         ExtendedRooms extendedRoomsData = Data.getInstance().getExtendedRooms();
+        HashMap<Integer,Integer> idToIndexExtendedRooms = Data.getInstance().getIdToIndexExtendedRooms();
         for(Room room : rooms.getmRooms()) {
-            extendedRooms.getExtendedRooms().add(extendedRoomsData.getExtendedRooms().get(room.getId()-1)); // The index corresponds with the id. //Has to be changed .. :(
+            System.out.print("index de la room " + room.getId() + " : ");
+            System.out.println(idToIndexExtendedRooms.get(room.getId()));
+            extendedRooms.getExtendedRooms().add(extendedRoomsData.getExtendedRooms().get(idToIndexExtendedRooms.get(room.getId())));
         }
         return extendedRooms;
     }
