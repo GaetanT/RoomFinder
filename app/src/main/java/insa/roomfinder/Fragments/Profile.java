@@ -97,8 +97,6 @@ public class Profile extends Fragment {
         mMailEditText.setText(mail);
         mPhoneNumberEditText.setText(phoneNumber);
 
-        System.out.println("NAME : " + fullName);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSiteSpinner.setAdapter(adapter);

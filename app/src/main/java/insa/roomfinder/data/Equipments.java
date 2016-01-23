@@ -22,13 +22,15 @@ public class Equipments implements Parcelable{
     public Equipments(ArrayList<Equipment> e){
         equipments = e;
     }
-
+    protected Equipments(Parcel in) {
+        this.equipments = new ArrayList<>();
+        in.readTypedList(equipments, Equipment.CREATOR);
+    }
 
     /* Methods */
     public ArrayList<Equipment> getEquipments() {
         return equipments;
     }
-
     public ArrayList<String> getEquipmentsName() {
         ArrayList<String> equipmentsName = new ArrayList<>();
         for (Equipment equipment : equipments) {
@@ -36,18 +38,9 @@ public class Equipments implements Parcelable{
         }
         return equipmentsName;
     }
-
     public void addEquipment(Equipment equipment) {
         equipments.add(equipment);
     }
-
-
-
-    protected Equipments(Parcel in) {
-        this.equipments = new ArrayList<>();
-        in.readTypedList(equipments, Equipment.CREATOR);
-    }
-
     public static final Creator<Equipments> CREATOR = new Creator<Equipments>() {
         @Override
         public Equipments createFromParcel(Parcel in) {

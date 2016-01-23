@@ -16,7 +16,6 @@ public class ExtendedRoom implements Parcelable {
         /*Attributes */
         @Element(name = "room")
         private Room room;
-
         @Element(name="equipments", required = false)
         private Equipments equipments = new Equipments();
 
@@ -26,27 +25,20 @@ public class ExtendedRoom implements Parcelable {
             this.equipments=equipments;
             this.room=room;
         }
+    protected ExtendedRoom(Parcel in) {
+        this.room = (Room) in.readValue(Room.class.getClassLoader());
+        this.equipments = (Equipments) in.readValue(Equipments.class.getClassLoader());
+    }
 
         /* Methods */
-
-
     public Equipments getEquipments() {
         return equipments;
     }
     public Room getRoom() {
         return room;
     }
-    public ArrayList<String> getEquipmentsName() {
-        return equipments.getEquipmentsName();
-    }
+    public ArrayList<String> getEquipmentsName() {return equipments.getEquipmentsName();}
 
-
-
-
-    protected ExtendedRoom(Parcel in) {
-        this.room = (Room) in.readValue(Room.class.getClassLoader());
-        this.equipments = (Equipments) in.readValue(Equipments.class.getClassLoader());
-    }
     public static final Creator<ExtendedRoom> CREATOR = new Creator<ExtendedRoom>() {
         @Override
         public ExtendedRoom createFromParcel(Parcel in) {

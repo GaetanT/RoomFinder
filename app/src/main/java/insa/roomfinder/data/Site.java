@@ -19,19 +19,12 @@ public class Site implements Parcelable {
 
     /* Constructor */
     public Site(){}
-    public Site (String name) {
-        this.name = name;
-    }
+    public Site (String name) {this.name = name;}
+    protected Site(Parcel in) {name = in.readString();}
 
     /* Methods */
     public String getName(){return name;}
     public void setName(String name){this.name=name;}
-
-
-
-    protected Site(Parcel in) {
-        name = in.readString();
-    }
 
     public static final Creator<Site> CREATOR = new Creator<Site>() {
         @Override

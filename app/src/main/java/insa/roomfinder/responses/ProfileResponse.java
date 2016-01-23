@@ -42,28 +42,12 @@ public class ProfileResponse {
         this.favSite = favSite;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Room getFavRoom() {
-        return favRoom;
-    }
-
-    public Site getFavSite() {
-        return favSite;
-    }
-
-    public Integer getId() {
-        return id;
-    }
+    /* Methods */
+    public String getName() {return name;}
+    public String getMail() {return mail;}
+    public String getPhone() {return phone;}
+    public Room getFavRoom() {return favRoom;}
+    public Site getFavSite() {return favSite;}
+    public Integer getId() {return id;}
 }
 

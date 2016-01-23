@@ -84,8 +84,7 @@ public class Search extends Fragment {
         return fragment;
     }
 
-    public Search() {
-    }
+    public Search() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,7 +114,6 @@ public class Search extends Fragment {
         mNameRoomButton = (Button) getView().findViewById(R.id.roomNameSearchButton);
 
 
-
         //Ajout des choix d'équipements
         int i;
         for (i = 0; i < mEquipmentsName.size(); i++) {
@@ -128,11 +126,9 @@ public class Search extends Fragment {
             } else {
                 mLayoutEquipment2.addView(checkbox);
             }
-
-
         }
 
-
+        //Met en place le datepicker
         Calendar mcurrentDate = Calendar.getInstance();
         int year = mcurrentDate.get(Calendar.YEAR);
         int month = mcurrentDate.get(Calendar.MONTH) + 1; //Cause months start at 0
@@ -146,8 +142,6 @@ public class Search extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.item_list_row, mRoomsName);
         AutoCompleteTextView textView = (AutoCompleteTextView) mRoomNameSearch;
         textView.setAdapter(adapter);
-
-        // Utiliser Data.getInstance().getExtendedRoomsName()) à la place de COUNTRIES dans le paragraphe ci dessus
 
         mDateText.setText(sDay + " " + sMonth + " " + sYear);
         mDateText.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +171,7 @@ public class Search extends Fragment {
         });
 
 
+        //Met les sites
         SharedPreferences sharedPreferences = getView().getContext().getSharedPreferences("Profile", Context.MODE_PRIVATE);
         String site = sharedPreferences.getString("site", "");
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getView().getContext(), android.R.layout.simple_spinner_item, mSitesName);
@@ -195,7 +190,7 @@ public class Search extends Fragment {
                 if (actionId == R.id.roomNameSearchView || actionId == EditorInfo.IME_NULL) {
 
                     //In order to quickly hide the keyboard
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
                     String roomName = mRoomNameSearch.getText().toString();
@@ -211,7 +206,7 @@ public class Search extends Fragment {
         @Override
         public void onClick(View v) {
             //In order to quickly hide the keyboard
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
             String roomName = mRoomNameSearch.getText().toString();
@@ -291,7 +286,6 @@ public class Search extends Fragment {
                                 t.printStackTrace();
                             }
                         }
-
                 );
     }
 }

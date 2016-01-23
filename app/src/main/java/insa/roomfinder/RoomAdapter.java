@@ -35,8 +35,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
     @Override
     public void onBindViewHolder(SalleViewHolder holder, int position) {
 
-        int couleur;
-
         //getItem(position) va récupérer l'item [position] de la List<Room> salles
         holder.mV.setTag(holder);
         holder.mV.setClickable(true);

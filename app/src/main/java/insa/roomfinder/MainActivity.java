@@ -12,7 +12,6 @@ import insa.roomfinder.Fragments.About;
 import insa.roomfinder.Fragments.LogOut;
 import insa.roomfinder.Fragments.Profile;
 import insa.roomfinder.Fragments.Search;
-import insa.roomfinder.data.Data;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -26,22 +25,17 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    private Data data;
-    private NetworkInterface mNi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
     }
 
@@ -69,13 +63,6 @@ public class MainActivity extends ActionBarActivity
 
     public void onSectionAttached(int number) {
         switch (number) {
-            /*
-            section1 ->Salles Favorites
-            section2 ->Recherche de Salles
-            section3 ->Profil
-            section4 ->Deconnection
-            section5 ->About
-            */
             case 1:
                 mTitle = getString(R.string.title_section2);
                 break;
@@ -119,7 +106,6 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-
 
         return super.onOptionsItemSelected(item);
     }

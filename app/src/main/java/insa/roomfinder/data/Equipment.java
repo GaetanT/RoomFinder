@@ -20,7 +20,6 @@ public class Equipment implements Parcelable{
     public Equipment(String name) {
         this.name=name;
     }
-
     protected Equipment(Parcel in) {
         name = in.readString();
     }

@@ -32,8 +32,7 @@ public class About extends Fragment {
         return fragment;
     }
 
-    public About() {
-    }
+    public About() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

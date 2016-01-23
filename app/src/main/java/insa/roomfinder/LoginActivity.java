@@ -327,7 +327,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         for(i=0;i<roomsResponse.body().getExtendedRooms().size();i++) {
                             roomId = roomsResponse.body().getExtendedRooms().get(i).getRoom().getId();
                             idToIndexExtendedRooms.put(roomId, i);
-                            System.out.println("roomId " + roomId +  " at index : " + idToIndexExtendedRooms.get(roomId));
                         }
                         //roomsResponse.body().setIdToIndexExtendedRooms(idToIndexExtendedRooms);
                         Data.getInstance().setExtendedRooms(roomsResponse.body());

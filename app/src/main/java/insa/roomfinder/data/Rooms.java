@@ -26,15 +26,12 @@ public class Rooms {
     public void setmRooms(ArrayList<Room> mRooms) {
         this.mRooms = mRooms;
     }
-
     public ArrayList<Room> getmRooms() {
         return mRooms;
     }
-
     public void addRoom(Room room) {
         mRooms.add(room);
     }
-
     public ArrayList<String> getRoomsName() {
         System.out.println("Je suis dans le getRoomsName de Rooms");
         ArrayList<String> roomsName = new ArrayList<>();

@@ -35,7 +35,6 @@ public class ExtendedRooms implements Parcelable {
     public ArrayList<ExtendedRoom> getExtendedRooms() {
         return extendedRooms;
     }
-
     public ArrayList<String> getRoomsName() {
         ArrayList<String> roomsName = new ArrayList<>();
         for (ExtendedRoom extendedRoom : extendedRooms) {
@@ -43,12 +42,7 @@ public class ExtendedRooms implements Parcelable {
         }
         return roomsName;
     }
-
-    public void addExtendedRoom(int index, ExtendedRoom extendedRoom) {
-        extendedRooms.add(index, extendedRoom);
-    }
-
-
+    public void addExtendedRoom(int index, ExtendedRoom extendedRoom) {extendedRooms.add(index, extendedRoom);}
     public ExtendedRooms roomsToExtendedRooms(Rooms rooms) {
         ExtendedRooms extendedRooms = new ExtendedRooms();
         ExtendedRooms extendedRoomsData = Data.getInstance().getExtendedRooms();
@@ -60,8 +54,6 @@ public class ExtendedRooms implements Parcelable {
         }
         return extendedRooms;
     }
-
-
     public static final Creator<ExtendedRooms> CREATOR = new Creator<ExtendedRooms>() {
         @Override
         public ExtendedRooms createFromParcel(Parcel in) {
