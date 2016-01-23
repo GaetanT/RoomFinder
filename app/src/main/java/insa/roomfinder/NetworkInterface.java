@@ -43,7 +43,4 @@ public interface NetworkInterface {
     @POST("search")
     Call<Rooms> searchRooms(@Body SearchRequest xml);
 
-
-
-
 }

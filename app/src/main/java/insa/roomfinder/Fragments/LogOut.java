@@ -1,4 +1,4 @@
-package insa.roomfinder;
+package insa.roomfinder.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import insa.roomfinder.LoginActivity;
+import insa.roomfinder.MainActivity;
+import insa.roomfinder.R;
 
 /**
  * Created by pierre on 10/01/16.

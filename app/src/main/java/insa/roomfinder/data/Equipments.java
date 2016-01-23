@@ -69,4 +69,15 @@ public class Equipments implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(equipments);
     }
+
+    @Override
+    public String toString() {
+        String equimentsNames = "";
+        for (Equipment equipment : equipments) {
+            equimentsNames = equimentsNames + ", " + equipment.getName();
+        }
+        if (!equimentsNames.isEmpty())
+            equimentsNames = equimentsNames.substring(2);
+        return equimentsNames;
+    }
 }

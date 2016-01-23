@@ -1,4 +1,4 @@
-package insa.roomfinder;
+package insa.roomfinder.Fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -28,6 +28,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import insa.roomfinder.Utils.DateUtil;
+import insa.roomfinder.MainActivity;
+import insa.roomfinder.NetworkInterface;
+import insa.roomfinder.R;
+import insa.roomfinder.ResultActivity;
 import insa.roomfinder.data.Data;
 import insa.roomfinder.data.Equipment;
 import insa.roomfinder.data.Equipments;

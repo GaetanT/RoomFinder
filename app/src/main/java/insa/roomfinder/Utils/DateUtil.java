@@ -1,4 +1,4 @@
-package insa.roomfinder;
+package insa.roomfinder.Utils;
 
 
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import insa.roomfinder.R;
 
 /**
  * Created by pierre on 03/01/16.

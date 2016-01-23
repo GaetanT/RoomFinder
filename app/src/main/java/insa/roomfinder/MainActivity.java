@@ -8,6 +8,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import insa.roomfinder.Fragments.About;
+import insa.roomfinder.Fragments.LogOut;
+import insa.roomfinder.Fragments.Profile;
+import insa.roomfinder.Fragments.Search;
 import insa.roomfinder.data.Data;
 
 public class MainActivity extends ActionBarActivity
@@ -47,27 +51,20 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position) {
             case 0:
-                fragmentManager.beginTransaction().replace(R.id.container, Favorite.newInstance(position + 1)).commit();
+                fragmentManager.beginTransaction().replace(R.id.container, Search.newInstance(position + 1)).commit();
                 break;
             case 1:
-                fragmentManager.beginTransaction().replace(R.id.container, Search.newInstance(position + 1)).commit();
-            break;
-            case 2:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
                 break;
-            case 3:
+            case 2:
                 fragmentManager.beginTransaction().replace(R.id.container, LogOut.newInstance(position + 1)).commit();
                 break;
-            case 4:
+            case 3:
                 fragmentManager.beginTransaction().replace(R.id.container, About.newInstance(position + 1)).commit();
                 break;
             default:
                 fragmentManager.beginTransaction().replace(R.id.container, Profile.newInstance(position + 1)).commit();
         }
-        /*fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();}
-        */
     }
 
     public void onSectionAttached(int number) {
@@ -80,18 +77,15 @@ public class MainActivity extends ActionBarActivity
             section5 ->About
             */
             case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
                 mTitle = getString(R.string.title_section2);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
+            case 3:
                 mTitle = getString(R.string.title_section4);
                 break;
-            case 5:
+            case 4:
                 mTitle = getString(R.string.title_section5);
                 break;
         }

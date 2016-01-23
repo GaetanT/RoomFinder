@@ -1,4 +1,4 @@
-package insa.roomfinder;
+package insa.roomfinder.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import insa.roomfinder.MainActivity;
+import insa.roomfinder.R;
 import insa.roomfinder.data.Data;
 
 /**

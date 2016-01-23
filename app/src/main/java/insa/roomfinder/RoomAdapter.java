@@ -1,6 +1,5 @@
 package insa.roomfinder;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,13 +47,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         holder.name.setText(extendedRoom.getRoom().getName());
         holder.size.setText(String.valueOf(extendedRoom.getRoom().getSize()));
         holder.site.setText(String.valueOf(extendedRoom.getRoom().getSite().getName()));
-
-        // if(room.isDispo()){
-        if (true) {
-            couleur= Color.GREEN;
-        }else{
-            couleur=Color.RED;
-        }
+        holder.equipments.setText(extendedRoom.getEquipments().toString());
     }
 
     @Override
@@ -66,16 +59,19 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SalleViewHolde
         public TextView name;
         public TextView site;
         public TextView size;
+        public TextView equipments;
         public ImageView porte;
         public ImageView position;
         public ImageView groupe;
         public View mV;
+
 
         public SalleViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
             size = (TextView) v.findViewById(R.id.size);
             site = (TextView) v.findViewById(R.id.site);
+            equipments = (TextView) v.findViewById(R.id.equipments);
             porte = (ImageView) v.findViewById(R.id.image_porte);
             position = (ImageView) v.findViewById(R.id.image_position);
             groupe = (ImageView) v.findViewById(R.id.image_groupe);

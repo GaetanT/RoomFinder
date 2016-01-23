@@ -1,17 +1,19 @@
-package insa.roomfinder;
+package insa.roomfinder.Fragments;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import insa.roomfinder.MainActivity;
+import insa.roomfinder.R;
+
 /**
  * Created by pierre on 02/01/16.
  */
-
-public class Result extends Fragment {
+public class About extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -22,22 +24,24 @@ public class Result extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static Result newInstance(int sectionNumber) {
-        Result fragment = new Result();
+    public static About newInstance(int sectionNumber) {
+        About fragment = new About();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public Result() {
+    public About() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.result, container, false);
+        View rootView = inflater.inflate(R.layout.about, container, false);
+
         return rootView;
+
     }
 
     @Override
